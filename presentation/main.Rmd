@@ -70,7 +70,7 @@ Journey <- st_linestring(
 Legend <- rbind(peru, austria)
 m <- mapview(Journey, color = "red",  lwd = 3, legend = FALSE, homebutton = FALSE) +
   mapview(Legend, legend = FALSE, homebutton = FALSE)
-m <- addLogo(m, "https://user-images.githubusercontent.com/16768318/84294830-5c52a280-ab0f-11ea-8e06-12f55c6781c9.png",
+m <- leafem::addLogo(m, "https://user-images.githubusercontent.com/16768318/84294830-5c52a280-ab0f-11ea-8e06-12f55c6781c9.png",
         position = "bottomright",
         offset.x = 50,
         offset.y = 50,

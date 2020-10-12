@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>CloudSEN12</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cesar Aybar* , Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+    <link href="libs/font-awesome-animation-1.0/font-awesome-animation-emi.css" rel="stylesheet" />
+    <script src="libs/fontawesome-5.0.13/js/fontawesome-all.min.js"></script>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    -->
+    <link rel="icon" href="images/favicon.ico"  type='image/x-icon'/>
+    <link rel="stylesheet" href="assets/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/monash-logo.css" type="text/css" />
+    <link rel="stylesheet" href="assets/monash-brand.css" type="text/css" />
+    <link rel="stylesheet" href="assets/monash-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/styles.css" type="text/css" />
+    <link rel="stylesheet" href="assets/custom.css" type="text/css" />
+    <link rel="stylesheet" href="assets/demo.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+background-image: url(images/earth.jpg)
+background-size: cover
+class: hide-slide-number split-70 title-slide
+count: false
+
+.column.shade_black[.content[
+
+&lt;br&gt;
+
+# .monash-blue.outline-text[CloudSEN12]
+
+&lt;h2 class="monash-blue2 outline-text" style="font-size: 30pt!important;"&gt;A benchmark Sentinel-1/2 dataset for cloud segmentation&lt;/h2&gt;
+
+&lt;br&gt;
+
+&lt;h2 style="font-weight:900!important;"&gt;Paper proposal&lt;/h2&gt;
+
+.bottom_abs.width100[
+
+**Cesar Aybar\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
+
+*Student at Copernicus Master in Digital Earth (EMCDE)
+
+<span>&lt;i class="fas  fa-envelope faa-float animated "&gt;&lt;/i&gt;</span>  csaybar@gmail.com
+
+9th Oct 2020
+
+&lt;br&gt;
+]
+
+
+]]
+
+&lt;div class="column transition monash-m-new delay-1s" style="clip-path:url(#swipe__clip-path);"&gt;
+&lt;div class="background-image" style="background-image:url('images/large.jpg');background-position: center;background-size:cover;margin-left:1px;"&gt;
+&lt;defs&gt;
+&lt;clipPath id="swipe__clip-path" clipPathUnits="objectBoundingBox"&gt;
+&lt;polygon points="0.5745 0, 0.5 0.33, 0.42 0, 0 0, 0 1, 0.27 1, 0.27 0.59, 0.37 1, 0.634 1, 0.736 0.59, 0.736 1, 1 1, 1 0, 0.5745 0" /&gt;
+&lt;/clipPath&gt;
+&lt;/defs&gt;	
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+---
+
+&lt;center&gt;
+&lt;img src="images/const.jpg" width=60%&gt;
+&lt;/center&gt;
+
+---
+# Motivation
+
+* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation.
+
+--
+* Lack of variety of scenes (e.g. avoid haze and cirrus presence). Like [Biome-8](https://landsat.usgs.gov/landsat-8-cloud-cover-assessment-validation-data) and
+[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs)
+
+--
+* Designed on a regional rather than global scale.
+
+--
+* Most of them are only designed for **fully supervised method**
+  - optical/radar (S1/S2) fusion.
+  - Meta-learning (few shot learning).
+
+--
+* I hate clouds &gt;:v.
+
+&lt;img src="images/old.jpg" style='position:absolute; bottom:0; right:0;' width=25%&gt;
+
+---
+# CloudSEN12 dataset 
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/cloudSEN2.png" width=90%&gt;
+&lt;/center&gt;
+
+---
+# CloudSEN12
+
+- Very large dataset for semantic segmentation.
+- \&gt; 13000 km2 of surface coverage and ~100GB of data.
+- Global coverage considering:
+  - Different types of clouds (contrails, haze/fog, cirrus, cumulus/cumulunimbus), 
+  cloud height and cloud thickness.
+  - 12 land uses considering CGLS-LC100.
+- Each image is composed:
+  - 13 Bands from Sentinel2 (+CDI) 
+  - 2 bands from Sentinel1 (VV and VH instrument IW).
+  - Fmask4.2, sen2cor, s2cloudness and Random Forest cloud map results.
+  - **Expert manual labeling**
+
+---
+# CloudSEN12 methodology
+
+&lt;center&gt;
+&lt;img src="images/methodology.png" width=65%&gt;
+&lt;/center&gt;
+
+---
+# Iris: Intelligence foR Image Segmentation
+
+ESA-Philab tool (created with flask!) for **manual image segmentation** and 
+classification of satellite imagery
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/segmentation.png" width=90%&gt;
+&lt;/center&gt;
+
+---
+# Tile Image
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/summ.png" width=110%&gt;
+&lt;/center&gt;
+
+---
+# Experiments
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;b&gt;Fully Convolutional Neural Networl (e.g. &lt;a href="https://paperpile.com/app/p/d5a77b88-8ebf-0d52-b7df-f9b8e836be71"&gt; Høxbroe et al. 2019 &lt;/a&gt;)&lt;/b&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/simple_fc.png" width=90%&gt;
+&lt;/center&gt;
+
+---
+# Experiments
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;b&gt;S2 and S1 fusion using Deep Residual Neural Network (e.g. &lt;a href="https://paperpile.com/app/p/4a4e1ac6-5efd-03bf-afd6-9d6eb41655a5"&gt; Andrea et al. 2019 &lt;/a&gt;)&lt;/b&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/cloud_removal.png" width=50%&gt;
+&lt;/center&gt;
+
+---
+# Experiments
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;b&gt;Meta-learning for Few-shot classification&lt;/b&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/few_shot.png" width=100%&gt;
+&lt;/center&gt;
+
+
+---
+# Experiments
+
+&lt;br&gt;
+&lt;br&gt;
+
+**Colorizing Sentinel-1 Image?** &lt;br&gt;
+
+**Land-Use classification?**
+
+---
+
+# Paper structure (early-pre-alpha)
+
+1. Introduction
+2. Data and Methods
+  - Sentinel-1
+  - Sentinel-2
+3. The CloudSEN12 dataset
+  - Data preparation
+  - Data selection
+  - Cloud mask models
+  - Cloud labeling
+  - Image Export
+4. Experiments
+5. Strengths and limitation of the dataset
+
+---
+
+class: motivator middle
+
+## has this project the possibility of being published?
+
+---
+
+class: informative middle
+
+## If so, which journal would be recommended?
+
+---
+
+
+background-image: url(images/earth.jpg)
+background-size: cover
+class: hide-slide-number split-70
+count: false
+
+.column.shade_black[.content[
+
+&lt;br&gt;&lt;br&gt;
+
+# That's it! ... Thank you for listening :)
+
+.bottom_abs.width100[
+
+**Cesar Aybar\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
+
+*Student at Copernicus Master in Digital Earth (EMCDE)&lt;br&gt;
+<span>&lt;i class="fas  fa-envelope faa-float animated "&gt;&lt;/i&gt;</span>  csaybar@gmail.com
+
+9th Oct 2020
+]
+
+
+]]
+
+
+
+&lt;div class="column transition monash-m-new delay-1s" style="clip-path:url(#swipe__clip-path);"&gt;
+&lt;div class="background-image" style="background-image:url('images/large.png');background-position: center;background-size:cover;margin-left:3px;"&gt;
+&lt;svg class="clip-svg absolute"&gt;
+&lt;defs&gt;
+&lt;clipPath id="swipe__clip-path" clipPathUnits="objectBoundingBox"&gt;
+&lt;polygon points="0.5745 0, 0.5 0.33, 0.42 0, 0 0, 0 1, 0.27 1, 0.27 0.59, 0.37 1, 0.634 1, 0.736 0.59, 0.736 1, 1 1, 1 0, 0.5745 0" /&gt;
+&lt;/clipPath&gt;
+&lt;/defs&gt;	
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLanguage": "r",
+"highlightLines": true,
+"highlightSpans": false,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%/%total%",
+"navigation": {
+"scroll": false,
+"touch": true,
+"click": false
+},
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'assets/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+---
+title: "CloudSEN12"
+week: "A benchmark Sentinel-1/2 dataset for cloud segmentation"
+subtitle: "Paper proposal"
+author: "**Cesar Aybar\\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas"
+email: "csaybar@gmail.com"
+date: "9th Oct 2020"
+bgimg: "images/earth.jpg"
+output:
+  xaringan::moon_reader:
+    css:
+      - ninjutsu 
+      - "assets/animate.css"
+      - "assets/monash-logo.css"
+      - "assets/monash-brand.css"
+      - "assets/monash-fonts.css"
+      - "assets/styles.css" # small improvements
+      - "assets/custom.css" # add your own CSS here!
+      - "assets/demo.css" # this should be removed
+    self_contained: false 
+    seal: false 
+    chakra: 'libs/remark-latest.min.js'
+    lib_dir: libs
+    includes:
+      in_header: "assets/custom.html"
+    mathjax: "assets/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    nature:
+      highlightStyle: github 
+      highlightLanguage: r 
+      highlightLines: true
+      highlightSpans: false 
+      countIncrementalSlides: false
+      slideNumberFormat: '%current%/%total%'
+      navigation:
+        scroll: false 
+        touch: true
+        click: false
+      ratio: '16:9'
+---
+
+
+```{r titleslide, child="components/titleslide.Rmd"}
+```
+
+---
+
+<center>
+<img src="images/const.jpg" width=60%>
+</center>
+
+---
+# Motivation
+
+* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation.
+
+--
+* Lack of variety of scenes (e.g. avoid haze and cirrus presence). Like [Biome-8](https://landsat.usgs.gov/landsat-8-cloud-cover-assessment-validation-data) and
+[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs)
+
+--
+* Designed on a regional rather than global scale.
+
+--
+* Most of them are only designed for **fully supervised method**
+  - optical/radar (S1/S2) fusion.
+  - Meta-learning (few shot learning).
+
+--
+* I hate clouds >:v.
+
+<img src="images/old.jpg" style='position:absolute; bottom:0; right:0;' width=25%>
+
+---
+# CloudSEN12 dataset 
+
+<br>
+
+<center>
+<img src="images/cloudSEN2.png" width=90%>
+</center>
+
+---
+# CloudSEN12
+
+- Very large dataset for semantic segmentation.
+- \> 13000 km2 of surface coverage and ~100GB of data.
+- Global coverage considering:
+  - Different types of clouds (contrails, haze/fog, cirrus, cumulus/cumulunimbus), 
+  cloud height and cloud thickness.
+  - 12 land uses considering CGLS-LC100.
+- Each image is composed:
+  - 13 Bands from Sentinel2 (+CDI) 
+  - 2 bands from Sentinel1 (VV and VH instrument IW).
+  - Fmask4.2, sen2cor, s2cloudness and Random Forest cloud map results.
+  - **Expert manual labeling**
+
+---
+# CloudSEN12 methodology
+
+<center>
+<img src="images/methodology.png" width=65%>
+</center>
+
+---
+# Iris: Intelligence foR Image Segmentation
+
+ESA-Philab tool (created with flask!) for **manual image segmentation** and 
+classification of satellite imagery
+
+<br>
+<center>
+<img src="images/segmentation.png" width=90%>
+</center>
+
+---
+# Tile Image
+<br>
+<center>
+<img src="images/summ.png" width=110%>
+</center>
+
+---
+# Experiments
+
+<br>
+
+<center>
+<b>Fully Convolutional Neural Networl (e.g. <a href="https://paperpile.com/app/p/d5a77b88-8ebf-0d52-b7df-f9b8e836be71"> Høxbroe et al. 2019 </a>)</b>
+</center>
+
+<br>
+
+<center>
+<img src="images/simple_fc.png" width=90%>
+</center>
+
+---
+# Experiments
+
+<br>
+
+<center>
+<b>S2 and S1 fusion using Deep Residual Neural Network (e.g. <a href="https://paperpile.com/app/p/4a4e1ac6-5efd-03bf-afd6-9d6eb41655a5"> Andrea et al. 2019 </a>)</b>
+</center>
+
+<br>
+
+<center>
+<img src="images/cloud_removal.png" width=50%>
+</center>
+
+---
+# Experiments
+
+<br>
+
+<center>
+<b>Meta-learning for Few-shot classification</b>
+</center>
+
+<br>
+
+<center>
+<img src="images/few_shot.png" width=100%>
+</center>
+
+
+---
+# Experiments
+
+<br>
+<br>
+
+**Colorizing Sentinel-1 Image?** <br>
+
+**Land-Use classification?**
+
+---
+
+# Paper structure (early-pre-alpha)
+
+1. Introduction
+2. Data and Methods
+  - Sentinel-1
+  - Sentinel-2
+3. The CloudSEN12 dataset
+  - Data preparation
+  - Data selection
+  - Cloud mask models
+  - Cloud labeling
+  - Image Export
+4. Experiments
+5. Strengths and limitation of the dataset
+
+---
+
+class: motivator middle
+
+## has this project the possibility of being published?
+
+---
+
+class: informative middle
+
+## If so, which journal would be recommended?
+
+---
+
+```{r endslide, child="components/endslide.Rmd"}
+```

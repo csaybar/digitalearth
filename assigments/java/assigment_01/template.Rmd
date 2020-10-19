@@ -1,0 +1,269 @@
+---
+title: "Software Development assignment I"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho (s1078735)"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+abstract: |
+  This assignment implements the java classes **CircleArea**, **CircleAreaUserInput**, and **Fibonacci** which calculate the area of a circle of 4 units, the area of a circle specified by a user, and prints the Fibonacci series.
+  
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+
+```
+
+# Question N° 01
+
+Create an executable class called "CircleArea", which calculates the area of a circle:
+
+  - The radius of the circle is 4 units
+
+I implemented and set the variables **circle_radius** and **circle_area** in the constructor of the class. 
+After that, I created a method **CircleArea.print** to display the results.
+
+```{java, eval=FALSE}
+/** Executable class to calculate the area of specific circle*/ 
+public class CircleArea {
+    Double circle_radius;
+    Double circle_area;
+
+    // Create the constructor
+    public CircleArea(Double radius) {   
+        circle_radius = radius;
+        circle_area = Math.PI*radius*radius;
+    }
+    
+    // Print results in a pretty way!
+    public void print () {              
+        System.out.format(
+            String.format(
+                "The area of the circle is: %.4f units\n",
+                 this.circle_area
+            )
+        );
+    }
+    
+    public static void main(String[] args) {
+        CircleArea circle = new CircleArea(4.0);
+        circle.print();
+    }
+}
+```
+
+**Results:**
+
+```{r, eval=TRUE, echo=FALSE}
+cat("The area of the circle is: 50.2655 units")
+```
+
+# Question N° 02
+
+**Create an executable class called _CircleAreaUserInput_ which calculates the area of a circle:**
+  
+  - The radius of the circle shall be entered by the user
+  - BufferedReader, Scanner
+  - Exception Handling (readLine() method)
+  - String to Integer conversion
+
+I implemented and set the variables **constructor** in the constructor of the class. 
+Secondly, I use the **java.util.Scanner** to get user input and RegEx to test if
+the information enter for the user is a number. Finally, I created a  method
+**CircleAreaUserInput.print** to display the results.
+
+```{java, eval=FALSE}
+/** Executable class to calculate the area of any circle*/ 
+import java.util.Scanner;
+
+public class CircleAreaUserInput {
+    Double circle_area;
+    // Create the constructor
+    public CircleAreaUserInput() {
+        // Scanner is class which permit us get user input
+        Scanner scanner_obj = new Scanner(System.in);
+        System.out.print("Enter the radius of the circle in meters: ");
+
+        // Read user input
+        String  radius_str = scanner_obj.nextLine();
+                
+        // Is radius_str non-numeric? 
+        if (!isNumeric(radius_str)) {
+            // Use the "throw" statement to throw an exception
+            throw new IllegalArgumentException(
+                "The radius enter is not an number!"
+            );
+        }
+
+        // Is radius negative? 
+        Double radius = Double.parseDouble(radius_str); 
+        
+        if (radius < 0) {
+            // Use the "throw" statement to throw an exception            
+            throw new IllegalArgumentException(
+                "The radius enter is negative!"
+            );
+        }
+
+        // Calculate the area of the circle        
+        circle_area = Math.PI*radius*radius;
+    }
+
+    // Evaluate if string is a number with RegEx.
+    private static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  
+    }
+
+    public void print() {
+        System.out.format(
+            String.format(
+                "The area of the circle is: %.4f m²\n", 
+                this.circle_area
+            )
+        );
+    }
+
+    public static void main(String[] args) {
+        CircleAreaUserInput circle_case = new CircleAreaUserInput();
+        circle_case.print();
+    }
+}
+```
+
+**Results:**
+```{r echo=FALSE}
+cat(
+  "
+  Enter the radius of the circle in meters: 24\n
+  The area of the circle is: 1809.5574 m²
+  "
+)
+```
+
+# Question N° 03
+
+**Create an executable class called _Fibonacci_ which prints the Fibonacci sequence:**
+
+  - Fibonacci: the printed number is the sum of the two previous numbers
+  - Definition: the first two numbers are 0 and 1
+  - Print 20 iterations
+
+This question was solved through recursion and memoization to reach an **O(n)** of time complexity.
+I used a map object to memoize the previous runs.
+
+```{java, eval=FALSE}
+/** Implementation of Fibonnaci algorithm with memoization and recursion*/ 
+
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Fibonnaci {
+    int init_number;
+    int results;
+    
+    /** Create the constructor of the class */
+    public Fibonnaci() {     
+        String init_message = "|Welcome to Fibonnaci generator with memoization|";
+        int init_message_length = init_message.length();
+        String simple_line = String.format("%s", "-".repeat(init_message_length));
+        System.out.println(simple_line);
+        System.out.println(init_message);
+        System.out.println(simple_line);          
+    }
+
+    // 2. Create a map object
+    // Hint: A map contains key:value pairs. A HashTable is a special table that
+    //       doesn't maintain any order.
+    private Map<Integer, Integer> memoization = new HashMap<>();
+    
+    /** Implementation of fibonnaci algorithm with memoization
+    * 
+    * @param n Integer. Index of interest of the Fibonnaci series
+    * @return Specific Fibonnaci serie value.
+    * @throws IllegalArgumentException if the {@code n} is negative.
+    *
+    */
+    private int fibonnaci_algorithm(int n) {
+        // 3.1 Is the number negative or non-integer? 
+        if (n < 0) {         
+            // Use the "throw" statement to throw an exception            
+            throw new IllegalArgumentException(
+                "The number enter is negative!"
+            );
+        }        
+
+        if (n == 0 || n == 1) {            
+            return n;
+        }
+        
+        // 3.2 This query exist in our Map object?
+        if (memoization.containsKey(n)) {            
+            return memoization.get(n);
+        } else {
+            // Fibonnaci is easier to solve trough recursion rather than iteration!
+            int fibb_number = fibonnaci_algorithm(n - 1) + fibonnaci_algorithm(n - 2);
+            // Adding a key:value to our map object (memoize)
+            memoization.put(n, fibb_number);
+            return fibb_number; 
+        }                        
+    }
+    
+    /**  Pretty display of Fibonacci series
+    * 
+    * @param n Integer. Index of interest of the Fibonnaci series
+    * @return Fibonnaci series.        
+    *
+    */    
+    public void run(int n) {        
+        List<Integer> fib_serie = new ArrayList<Integer>();
+        // 4.1 Run "fibonnaci_algorithm" in a reverse loop to force to use memoization.
+        for (int i = n - 1; i >= 0; i--) {        
+            fib_serie.add(fibonnaci_algorithm(i));            
+        }
+        // 4.2 Reverse the order in a list
+        Collections.reverse(fib_serie);
+
+        // 4.3 Print results        
+        System.out.println(String.format("fibonnaci.run(%s):", n) + fib_serie);
+    }
+
+    public static void main(String[] args) {
+        Fibonnaci serie = new Fibonnaci();
+        serie.run(20);
+    }    
+}
+```
+
+**Results:**
+
+```{r question_02, eval=TRUE, echo=FALSE}
+cat("
+------------------------------------------------- \n
+|Welcome to Fibonnaci generator with memoization| \n
+------------------------------------------------- \n
+fibonnaci.run(20):[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]
+")
+```

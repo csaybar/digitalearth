@@ -277,7 +277,9 @@ leaflet(kinder[kinder$PLAETZE >= 25,]) %>%
 ------------------------------------------------------------------------
 
 <div class="floro">
+Taking 750 meters as a constant value for the range of influence, it can be seen that the kindergartens' services area covers 50% of the Salzburg district.
 
-Taking 750 meters as a constant value for the range of influence, it can be seen that the kindergartens' services area covers 65% of the Salzburg district.
+Although there are better ways to estimate the radius of influence than the euclidean distance (e.g. cost distance or network distance), this information is still very useful for decision makers to know **where to build kindergartens**. 
 
+To find suitable locations, we also recommend taking into account population density and proximity to parks.
 </div>

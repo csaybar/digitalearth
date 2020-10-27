@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I</title>
+  <meta name="description" content="3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="question-n-02.html"/>
+
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="question-n-01.html"><a href="question-n-01.html"><i class="fa fa-check"></i><b>1</b> Question N° 01</a></li>
+<li class="chapter" data-level="2" data-path="question-n-02.html"><a href="question-n-02.html"><i class="fa fa-check"></i><b>2</b> Question N° 02</a></li>
+<li class="chapter" data-level="3" data-path="question-n-03.html"><a href="question-n-03.html"><i class="fa fa-check"></i><b>3</b> Question N° 03</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Digital Earth: Big Earth Data Concept - assignment I</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="question-n-03" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Question N° 03</h1>
+<p><strong>Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.</strong></p>
+<p><strong>MACCS</strong> (Multi-sensor Atmospheric Correction and Cloud Screening) combined with
+<strong>ATCOR</strong> (Atmospheric and Topographic Correction) generated <strong>MAJA</strong>
+(MACCS-ATCOR Joint Algorithm) a software develop and maintain by CNES, CESBIO and DLR. For Sentinel-2 Level-2A, <strong>MAJA</strong> only covers France, Germany and other specific requested areas in the world.</p>
+<p>For convert TOA to BOA values, <strong>MAJA</strong> contains module to estimate the H20 content and correct the atmospheric absorption (See <a href="https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/">SMAC</a>). Inspired in ATCOR, also correct the influence of the slope and adjancency effect.</p>
+<p>For cloud detection, <strong>MAJA</strong> works with multiple images (time-series) due this method assume surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. However, it assumption could be a problem in almost always cloud cover regions like the Peruvian Amazon.</p>
+<p><strong>Describe the main differences in the production chains compared to the ESA Level-2A data.</strong></p>
+<p>Unlike <strong>Sen2Cor</strong>, <strong>MAJA</strong></p>
+<p>The method assumes that surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. MAJA
+uses multi-temporal images that contain the most recent cloud-free observation for each pixel.
+At each new image, the algorithm updates this composite with the newly-available cloud-free pixels.
+Thus, it processes the data for a given location in chronological order. The algorithm needs to be
+initialized to fix cases where a given pixel has no cloud-free observations. To cover these specific cases, MAJA also uses a mono-temporal criterion based only on spectral information.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="question-n-02.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

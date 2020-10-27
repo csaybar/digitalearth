@@ -1,4 +1,5 @@
 /** Executable class to calculate the area of specific circle*/ 
+package assigment1_CesarLuisAybarCamacho;
 public class CircleArea {
     Double circle_radius;
     Double circle_area;
@@ -10,7 +11,7 @@ public class CircleArea {
     }
     
     // Print results in a pretty way!
-    public void print () {              
+    public void print () {        
         System.out.format(
             String.format(
                 "The area of the circle is: %.4f units\n",

@@ -88,26 +88,21 @@ Finally is important to notice that the **USGS** ARD is only available at the co
 
 In my opinion, there are two main reasons:
 
-- **Massive increase of satellite images which will soon be impossible to handle**; approaches like ARD dramatically reduce processing time, facilitate 
-reproducible research pipelines and thereby accelerate science production.
+- **Massive increase of satellite images which will soon be impossible to handle**; approaches like ARD dramatically reduce processing time, facilitate reproducible research pipelines and thereby accelerate science production.
 
-- **Ease of use for remote sensing non-expert**. ARD make possible, for instance, computer vision experts can build deep learning models despite not having knowledge about satellite image pre-processing.
+- **Ease of use for non-Remote Sensing Experts**. ARD make possible that, for instance, computer vision experts can build deep learning models despite not having knowledge about satellite image pre-processing.
 
 # Question N° 02
 
 **Summarize in a short paragraph the main elements of the ESA Sentinel-2 Level-2A specifications and how they are processed.**
 
-ESA Sentinel-2 Level-2A in comparison to Level-1C present two principal improvements. The Atmospheric Correction which convert values from TOA to BOA 
-(based on the LIBRADTRAN radiative transfer model) and an additional band 
-called **Scene Classification** (SC). SC is a  pixels classification map which
-is useful, for instance, to mask cloud and cloud shadow values. 
+ESA Sentinel-2 Level-2A in comparison to Level-1C presents two principal improvements. The Atmospheric Correction which converts values from TOA to BOA (based on the LIBRADTRAN radiative transfer model) and adds an additional band called **Scene Classification** (SC). SC is a pixel classification map that is useful, for instance, to mask cloud and cloud shadow values. 
 
 <center>
 <img src = img/download.png width=35%>
 <br>
 Scene Classification Values
 </center>
-
 
 **Are Level-2A data available for all areas at the moment?**
 
@@ -124,22 +119,12 @@ Sentinel-2 Level 2A products from Level 1C products.
 
 **MACCS** (Multi-sensor Atmospheric Correction and Cloud Screening) combined with 
 **ATCOR** (Atmospheric and Topographic Correction) generated **MAJA** 
-(MACCS-ATCOR Joint Algorithm) a software develop and maintain by  CNES, CESBIO and DLR. For Sentinel-2 Level-2A, **MAJA** only covers France, Germany and other specific requested areas in the world.
+(MACCS-ATCOR Joint Algorithm) a software developed and maintained by CNES, CESBIO, and DLR. For Sentinel-2 Level-2A, **MAJA** only covers France, Germany, and other specific requested areas in the world.
 
-For convert TOA to BOA values, **MAJA** contains module to estimate the H20 content and correct the atmospheric absorption (See [SMAC](https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/)). Inspired in ATCOR, also correct the influence of the slope and adjancency effect.
+To convert TOA to BOA values, **MAJA** contains modules to estimate the H20 content and correct the atmospheric absorption (See [SMAC](https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/)). Inspired in ATCOR, also correct the influence of the slope and adjacency effect in reflectance values.
 
-For cloud detection, **MAJA** works with multiple images (time-series) due this method assume surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. However, it assumption could be a problem in almost always cloud cover regions like the Peruvian Amazon.
-
-
-
+For cloud detection, **MAJA** works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes/breaks in the series. However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See [Sanchez et al. 2020](https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473)).
 
 **Describe the main differences in the production chains compared to the ESA Level-2A data.**
 
 Unlike **Sen2Cor**, **MAJA** 
-
-
-The method assumes that surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. MAJA
-uses multi-temporal images that contain the most recent cloud-free observation for each pixel.
-At each new image, the algorithm updates this composite with the newly-available cloud-free pixels.
-Thus, it processes the data for a given location in chronological order. The algorithm needs to be
-initialized to fix cases where a given pixel has no cloud-free observations. To cover these specific cases, MAJA also uses a mono-temporal criterion based only on spectral information.

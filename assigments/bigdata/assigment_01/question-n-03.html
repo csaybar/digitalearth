@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I</title>
   <meta name="description" content="3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Question N° 03 | Digital Earth: Big Earth Data Concept - assignment I" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
 <link rel="prev" href="question-n-02.html"/>
 
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,7 +49,8 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -97,16 +98,11 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
 <p><strong>Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.</strong></p>
 <p><strong>MACCS</strong> (Multi-sensor Atmospheric Correction and Cloud Screening) combined with
 <strong>ATCOR</strong> (Atmospheric and Topographic Correction) generated <strong>MAJA</strong>
-(MACCS-ATCOR Joint Algorithm) a software develop and maintain by CNES, CESBIO and DLR. For Sentinel-2 Level-2A, <strong>MAJA</strong> only covers France, Germany and other specific requested areas in the world.</p>
-<p>For convert TOA to BOA values, <strong>MAJA</strong> contains module to estimate the H20 content and correct the atmospheric absorption (See <a href="https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/">SMAC</a>). Inspired in ATCOR, also correct the influence of the slope and adjancency effect.</p>
-<p>For cloud detection, <strong>MAJA</strong> works with multiple images (time-series) due this method assume surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. However, it assumption could be a problem in almost always cloud cover regions like the Peruvian Amazon.</p>
+(MACCS-ATCOR Joint Algorithm) a software developed and maintained by CNES, CESBIO, and DLR. For Sentinel-2 Level-2A, <strong>MAJA</strong> only covers France, Germany, and other specific requested areas in the world.</p>
+<p>To convert TOA to BOA values, <strong>MAJA</strong> contains modules to estimate the H20 content and correct the atmospheric absorption (See <a href="https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/">SMAC</a>). Inspired in ATCOR, also correct the influence of the slope and adjacency effect in reflectance values.</p>
+<p>For cloud detection, <strong>MAJA</strong> works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes/breaks in the series. However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See <a href="https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473">Sanchez et al. 2020</a>).</p>
 <p><strong>Describe the main differences in the production chains compared to the ESA Level-2A data.</strong></p>
 <p>Unlike <strong>Sen2Cor</strong>, <strong>MAJA</strong></p>
-<p>The method assumes that surface reflectances without clouds are stable in time, while clouds or cloud shadows result in quick variations. MAJA
-uses multi-temporal images that contain the most recent cloud-free observation for each pixel.
-At each new image, the algorithm updates this composite with the newly-available cloud-free pixels.
-Thus, it processes the data for a given location in chronological order. The algorithm needs to be
-initialized to fix cases where a given pixel has no cloud-free observations. To cover these specific cases, MAJA also uses a mono-temporal criterion based only on spectral information.</p>
 </div>
             </section>
 

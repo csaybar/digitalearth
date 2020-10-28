@@ -2,9 +2,9 @@
 title: "CloudSEN12"
 week: "A benchmark Sentinel-1/2 dataset for cloud segmentation"
 subtitle: "Paper proposal"
-author: "**Cesar Aybar\\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas"
+author: "**Cesar Aybar\\* **, Martin Sudmanns, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas"
 email: "csaybar@gmail.com"
-date: "9th Oct 2020"
+date: "28th Oct 2020"
 bgimg: "images/earth.jpg"
 output:
   xaringan::moon_reader:
@@ -42,6 +42,14 @@ output:
 ```{r titleslide, child="components/titleslide.Rmd"}
 ```
 
+```{r setup, include=FALSE}
+library(dplyr)
+library(kableExtra)
+library(formattable)
+library(crayon)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ---
 
 <center>
@@ -51,19 +59,20 @@ output:
 ---
 # Motivation
 
-* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation.
+* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation. In our best knowledge, the most advanced is [SEN12MS](https://paperpile.com/app/p/a83e2843-e880-0fb6-99a4-50ded9078482).
 
 --
 * Lack of variety of scenes (e.g. avoid haze and cirrus presence). Like [Biome-8](https://landsat.usgs.gov/landsat-8-cloud-cover-assessment-validation-data) and
-[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs)
+[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs).
 
 --
 * Designed on a regional rather than global scale.
 
 --
 * Most of them are only designed for **fully supervised method**
-  - optical/radar (S1/S2) fusion.
-  - Meta-learning (few shot learning).
+  - optical/radar fusion ([Schmitt et al. 2020](https://paperpile.com/app/p/442c85f2-0c6b-030b-ac59-2d689051edf7)).
+  - Meta-learning ([Castillo-Navarro et al. 2020](https://paperpile.com/app/p/a0c84df2-3351-03bb-a770-15764c99152a)).
+  - Few-shot learning ([Rußwurm et al. 2020](https://paperpile.com/app/p/69ab0b0c-ea15-0158-bf03-d06f3f9e2fc0)).
 
 --
 * I hate clouds >:v.
@@ -71,35 +80,89 @@ output:
 <img src="images/old.jpg" style='position:absolute; bottom:0; right:0;' width=25%>
 
 ---
-# CloudSEN12 dataset 
+# CloudSEN12 dataset
 
 <br>
 
 <center>
-<img src="images/cloudSEN2.png" width=90%>
+<img src="images/cloudSEN2.png" width=1000px>
+</center>
+
+---
+# CloudSEN12 dataset
+
+<br>
+
+<center>
+<img src="images/new_CloudSEN12.png" width=1000px>
 </center>
 
 ---
 # CloudSEN12
 
-- Very large dataset for semantic segmentation.
-- \> 13000 km2 of surface coverage and ~100GB of data.
-- Global coverage considering:
-  - Different types of clouds (contrails, haze/fog, cirrus, cumulus/cumulunimbus), 
-  cloud height and cloud thickness.
-  - 12 land uses considering CGLS-LC100.
+- \> 40000 km2 of surface coverage and ~200GB of data.
+- **Global coverage** considering diferents:
+  - Types of clouds (contrails, haze/fog, cirrus, cumulus/cumulonimbus), 
+  - Cloud height. 
+  - Cloud thickness.
+  - Land use (CGLS-LC100).
 - Each image is composed:
   - 13 Bands from Sentinel2 (+CDI) 
   - 2 bands from Sentinel1 (VV and VH instrument IW).
-  - Fmask4.2, sen2cor, s2cloudness and Random Forest cloud map results.
+  - Fmask4.2, sen2cor, s2cloudness, Unet and Random Forest cloud map results.
   - **Expert manual labeling**
 
 ---
 # CloudSEN12 methodology
 
 <center>
-<img src="images/methodology.png" width=65%>
+<img src="images/methodology_1.png" width=1000px>
 </center>
+
+---
+# CloudSEN12 classes
+
+<br>
+```{r, echo=FALSE}
+text_tbl <- data.frame(
+  Method = c("Fmask4.2", "Sen2Cor", "s2cloudness", "Random Forest", "U-net", "CloudSEN12"),
+  Classes = c(
+    "Clear, Cloud and Cloud Shadow",
+    "Clear, Cloud and Cloud Shadow", 
+    "Clear and Cloud Shadow",
+    "Clear, Thick cloud, Thin cloud, Cloud Shadow",
+    "Clear, Thick cloud, Thin cloud, Cloud Shadow",
+    "Clear, Thick cloud, Thin cloud, Cloud Shadow"
+  )
+)
+
+kbl(text_tbl) %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = F, border_right = T)
+```
+
+---
+# CloudSEN12 classes
+
+<br>
+```{r, echo=FALSE}
+text_tbl <- data.frame(
+  Class = c("Clear", "Thick cloud", "Thin cloud", "Cloud shadow", "No data"),
+  Classes = c(
+    "All clear pixels, i.e. without cloud contamination or cloud shadows.",
+    "All cloudy pixels covered by thick clouds (does not include semi-transparent or cloud shadows).", 
+    "Clouds that are semi-transparent.",
+    "All pixels contaminated by cloud shadows (not terrain shadows).",
+    "Reserved for no data pixels."
+  )
+)
+
+kbl(text_tbl) %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = F, border_right = T)
+```
 
 ---
 # Iris: Intelligence foR Image Segmentation
@@ -114,11 +177,24 @@ classification of satellite imagery
 
 ---
 # Tile Image
-<br>
-<center>
-<img src="images/summ.png" width=110%>
-</center>
 
+**input.tif**
+
+  - **B1 to B13:** Sentinel-2.
+  - **B14:** CDI.
+  - **B15 to B17:** Sentinel-1 (VV, VH and angle).
+  - **B18:** Merit DEM.
+  - **B19:** CGLS-100 (land use).
+
+**target.tif**
+
+  - **Manual labeling**
+  - **Sen2cor**
+  - **S2cloudness**
+  - **Fmask v4.2**
+  - **Random Forest**
+  - **Unet**
+  
 ---
 # Experiments
 
@@ -169,7 +245,6 @@ classification of satellite imagery
 # Experiments
 
 <br>
-<br>
 
 **Colorizing Sentinel-1 Image?** <br>
 
@@ -191,18 +266,6 @@ classification of satellite imagery
   - Image Export
 4. Experiments
 5. Strengths and limitation of the dataset
-
----
-
-class: motivator middle
-
-## has this project the possibility of being published?
-
----
-
-class: informative middle
-
-## If so, which journal would be recommended?
 
 ---
 

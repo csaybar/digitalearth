@@ -3,14 +3,17 @@
   <head>
     <title>CloudSEN12</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Cesar Aybar* , Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas" />
+    <meta name="author" content="Cesar Aybar* , Martin Sudmanns, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas" />
+    <script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
     <link href="libs/font-awesome-animation-1.0/font-awesome-animation-emi.css" rel="stylesheet" />
     <script src="libs/fontawesome-5.0.13/js/fontawesome-all.min.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
     -->
-    <link rel="icon" href="images/favicon.ico"  type='image/x-icon'/>
+    <link rel="icon" href="images/favicon.ico"  type='image/x-icon'/>    
     <link rel="stylesheet" href="assets/animate.css" type="text/css" />
     <link rel="stylesheet" href="assets/monash-logo.css" type="text/css" />
     <link rel="stylesheet" href="assets/monash-brand.css" type="text/css" />
@@ -44,13 +47,13 @@ count: false
 
 .bottom_abs.width100[
 
-**Cesar Aybar\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
+**Cesar Aybar\* **, Martin Sudmanns, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
 
 *Student at Copernicus Master in Digital Earth (EMCDE)
 
 <span>&lt;i class="fas  fa-envelope faa-float animated "&gt;&lt;/i&gt;</span>  csaybar@gmail.com
 
-9th Oct 2020
+28th Oct 2020
 
 &lt;br&gt;
 ]
@@ -71,6 +74,8 @@ count: false
 
 
 
+
+
 ---
 
 &lt;center&gt;
@@ -80,19 +85,20 @@ count: false
 ---
 # Motivation
 
-* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation.
+* There is no a curated, globally, and georeferenced S2/S1 dataset for cloud segmentation. In our best knowledge, the most advanced is [SEN12MS](https://paperpile.com/app/p/a83e2843-e880-0fb6-99a4-50ded9078482).
 
 --
 * Lack of variety of scenes (e.g. avoid haze and cirrus presence). Like [Biome-8](https://landsat.usgs.gov/landsat-8-cloud-cover-assessment-validation-data) and
-[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs)
+[SPARCS](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs).
 
 --
 * Designed on a regional rather than global scale.
 
 --
 * Most of them are only designed for **fully supervised method**
-  - optical/radar (S1/S2) fusion.
-  - Meta-learning (few shot learning).
+  - optical/radar fusion ([Schmitt et al. 2020](https://paperpile.com/app/p/442c85f2-0c6b-030b-ac59-2d689051edf7)).
+  - Meta-learning ([Castillo-Navarro et al. 2020](https://paperpile.com/app/p/a0c84df2-3351-03bb-a770-15764c99152a)).
+  - Few-shot learning ([Rußwurm et al. 2020](https://paperpile.com/app/p/69ab0b0c-ea15-0158-bf03-d06f3f9e2fc0)).
 
 --
 * I hate clouds &gt;:v.
@@ -100,35 +106,118 @@ count: false
 &lt;img src="images/old.jpg" style='position:absolute; bottom:0; right:0;' width=25%&gt;
 
 ---
-# CloudSEN12 dataset 
+# CloudSEN12 dataset
 
 &lt;br&gt;
 
 &lt;center&gt;
-&lt;img src="images/cloudSEN2.png" width=90%&gt;
+&lt;img src="images/cloudSEN2.png" width=1000px&gt;
+&lt;/center&gt;
+
+---
+# CloudSEN12 dataset
+
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/new_CloudSEN12.png" width=1000px&gt;
 &lt;/center&gt;
 
 ---
 # CloudSEN12
 
-- Very large dataset for semantic segmentation.
-- \&gt; 13000 km2 of surface coverage and ~100GB of data.
-- Global coverage considering:
-  - Different types of clouds (contrails, haze/fog, cirrus, cumulus/cumulunimbus), 
-  cloud height and cloud thickness.
-  - 12 land uses considering CGLS-LC100.
+- \&gt; 40000 km2 of surface coverage and ~200GB of data.
+- **Global coverage** considering diferents:
+  - Types of clouds (contrails, haze/fog, cirrus, cumulus/cumulonimbus), 
+  - Cloud height. 
+  - Cloud thickness.
+  - Land use (CGLS-LC100).
 - Each image is composed:
   - 13 Bands from Sentinel2 (+CDI) 
   - 2 bands from Sentinel1 (VV and VH instrument IW).
-  - Fmask4.2, sen2cor, s2cloudness and Random Forest cloud map results.
+  - Fmask4.2, sen2cor, s2cloudness, Unet and Random Forest cloud map results.
   - **Expert manual labeling**
 
 ---
 # CloudSEN12 methodology
 
 &lt;center&gt;
-&lt;img src="images/methodology.png" width=65%&gt;
+&lt;img src="images/methodology_1.png" width=1000px&gt;
 &lt;/center&gt;
+
+---
+# CloudSEN12 classes
+
+&lt;br&gt;
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Method &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Classes &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Fmask4.2 &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear, Cloud and Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Sen2Cor &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear, Cloud and Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; s2cloudness &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear and Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Random Forest &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear, Thick cloud, Thin cloud, Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; U-net &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear, Thick cloud, Thin cloud, Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; CloudSEN12 &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clear, Thick cloud, Thin cloud, Cloud Shadow &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# CloudSEN12 classes
+
+&lt;br&gt;
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Class &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Classes &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Clear &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; All clear pixels, i.e. without cloud contamination or cloud shadows. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Thick cloud &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; All cloudy pixels covered by thick clouds (does not include semi-transparent or cloud shadows). &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Thin cloud &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Clouds that are semi-transparent. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; Cloud shadow &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; All pixels contaminated by cloud shadows (not terrain shadows). &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;border-right:1px solid;"&gt; No data &lt;/td&gt;
+   &lt;td style="text-align:left;border-right:1px solid;"&gt; Reserved for no data pixels. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 # Iris: Intelligence foR Image Segmentation
@@ -143,11 +232,24 @@ classification of satellite imagery
 
 ---
 # Tile Image
-&lt;br&gt;
-&lt;center&gt;
-&lt;img src="images/summ.png" width=110%&gt;
-&lt;/center&gt;
 
+**input.tif**
+
+  - **B1 to B13:** Sentinel-2.
+  - **B14:** CDI.
+  - **B15 to B17:** Sentinel-1 (VV, VH and angle).
+  - **B18:** Merit DEM.
+  - **B19:** CGLS-100 (land use).
+
+**target.tif**
+
+  - **Manual labeling**
+  - **Sen2cor**
+  - **S2cloudness**
+  - **Fmask v4.2**
+  - **Random Forest**
+  - **Unet**
+  
 ---
 # Experiments
 
@@ -198,7 +300,6 @@ classification of satellite imagery
 # Experiments
 
 &lt;br&gt;
-&lt;br&gt;
 
 **Colorizing Sentinel-1 Image?** &lt;br&gt;
 
@@ -223,18 +324,6 @@ classification of satellite imagery
 
 ---
 
-class: motivator middle
-
-## has this project the possibility of being published?
-
----
-
-class: informative middle
-
-## If so, which journal would be recommended?
-
----
-
 
 background-image: url(images/earth.jpg)
 background-size: cover
@@ -249,12 +338,12 @@ count: false
 
 .bottom_abs.width100[
 
-**Cesar Aybar\* **, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
+**Cesar Aybar\* **, Martin Sudmanns, Roy Yali, Fernando Prudencio, Jhomira Loja, Fernando Herrera, and Luis Ysuhuaylas
 
 *Student at Copernicus Master in Digital Earth (EMCDE)&lt;br&gt;
 <span>&lt;i class="fas  fa-envelope faa-float animated "&gt;&lt;/i&gt;</span>  csaybar@gmail.com
 
-9th Oct 2020
+28th Oct 2020
 ]
 
 

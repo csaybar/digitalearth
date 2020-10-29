@@ -95,14 +95,19 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
             <section class="normal" id="section-">
 <div id="question-n-03" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Question N° 03</h1>
-<p><strong>Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.</strong></p>
+<p><strong>3.1. Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.</strong></p>
 <p><strong>MACCS</strong> (Multi-sensor Atmospheric Correction and Cloud Screening) combined with
 <strong>ATCOR</strong> (Atmospheric and Topographic Correction) generated <strong>MAJA</strong>
 (MACCS-ATCOR Joint Algorithm) a software developed and maintained by CNES, CESBIO, and DLR. For Sentinel-2 Level-2A, <strong>MAJA</strong> only covers France, Germany, and other specific requested areas in the world.</p>
 <p>To convert TOA to BOA values, <strong>MAJA</strong> contains modules to estimate the H20 content and correct the atmospheric absorption (See <a href="https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/">SMAC</a>). Inspired in ATCOR, also correct the influence of the slope and adjacency effect in reflectance values.</p>
-<p>For cloud detection, <strong>MAJA</strong> works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes/breaks in the series. However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See <a href="https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473">Sanchez et al. 2020</a>).</p>
-<p><strong>Describe the main differences in the production chains compared to the ESA Level-2A data.</strong></p>
-<p>Unlike <strong>Sen2Cor</strong>, <strong>MAJA</strong></p>
+<p>For cloud detection, <strong>MAJA</strong> works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes in the series (using a cloud-free composites). However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See <a href="https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473">Sanchez et al. 2020</a>).</p>
+<p><strong>3.2. Describe the main differences in the production chains compared to the ESA Level-2A data.</strong></p>
+<p>The main differences are:</p>
+<ul>
+<li><p>Theia use <strong>MAJA</strong> while ESA use <strong>Sen2cor</strong>.</p></li>
+<li><p>Theia level 2A use composites (continuously updated) to enhance aerosol detection and cloud detection.</p></li>
+<li><p>ESA produces a pixel classification map (SC) while Theia only generates a cloud mask (cloud, cloud shadow, and cirrus).</p></li>
+</ul>
 </div>
             </section>
 

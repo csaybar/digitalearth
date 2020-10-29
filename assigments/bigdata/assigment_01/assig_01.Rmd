@@ -37,7 +37,7 @@ readr::write_lines(htmlhead, path = "header.html")
 
 # Question N° 01
 
-**Name and explain some common characteristics of the three different ARD definitions / approaches.**
+**1.1. Name and explain some common characteristics of the three different ARD definitions / approaches.**
 
 **A**nalysis-**r**eady-**d**ata (**ARD**) is a new trends among satellite imagery providers  that consist in create fully harmonized dataset, with the intention 
 that, final users only have to worry about data analysis ([Andreia Siqueira et al. 2019](https://paperpile.com/app/p/5ef2ffac-56a6-0d82-8bd6-b32c3b83a8b5)).
@@ -84,19 +84,19 @@ As can be seen, **Planet** and **USGS** (**CARD4L**) ARD implementations are qui
 
 Finally is important to notice that the **USGS** ARD is only available at the conterminous United States, Alaska and Hawaii.
 
-**Explain in your own words why satellite data provider found it necessary to investigate how ARD can be created and delivered to users.**
+**1.2. Explain in your own words why satellite data provider found it necessary to investigate how ARD can be created and delivered to users.**
 
 In my opinion, there are two main reasons:
 
-- **Massive increase of satellite images which will soon be impossible to handle**; approaches like ARD dramatically reduce processing time, facilitate reproducible research pipelines and thereby accelerate science production.
+- **A massive increase of satellite images**; approaches like ARD dramatically reduce processing time, facilitate reproducible research pipelines and thereby accelerate science production.
 
 - **Ease of use for non-Remote Sensing Experts**. ARD make possible that, for instance, computer vision experts can build deep learning models despite not having knowledge about satellite image pre-processing.
 
 # Question N° 02
 
-**Summarize in a short paragraph the main elements of the ESA Sentinel-2 Level-2A specifications and how they are processed.**
+**2.1. Summarize in a short paragraph the main elements of the ESA Sentinel-2 Level-2A specifications and how they are processed.**
 
-ESA Sentinel-2 Level-2A in comparison to Level-1C presents two principal improvements. The Atmospheric Correction which converts values from TOA to BOA (based on the LIBRADTRAN radiative transfer model) and adds an additional band called **Scene Classification** (SC). SC is a pixel classification map that is useful, for instance, to mask cloud and cloud shadow values. 
+ESA Sentinel-2 Level-2A in comparison to Level-1C presents two principal improvements. The Atmospheric Correction which converts values from TOA to BOA (based on the LIBRADTRAN radiative transfer model) and a new band called **Scene Classification** (SC). SC is a pixel classification map that is useful, for instance, to mask cloud and cloud shadow values. 
 
 <center>
 <img src = img/download.png width=35%>
@@ -104,18 +104,18 @@ ESA Sentinel-2 Level-2A in comparison to Level-1C presents two principal improve
 Scene Classification Values
 </center>
 
-**Are Level-2A data available for all areas at the moment?**
+**2.2. Are Level-2A data available for all areas at the moment?**
 
 According to ESA the Sentinel-2 level-2A global coverage production started in December 2018. See this [link](https://earth.esa.int/web/sentinel/technical-guides/sentinel-2-msi/level-2a-processing).
 
-**What is “Sen2Cor”?**
+**2.3. What is “Sen2Cor”?**
 
 In a nutshell, Sen2Cor is a software maintained by ESA that permit generate 
 Sentinel-2 Level 2A products from Level 1C products.
 
 # Question N° 03
 
-**Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.**
+**3.1. Describe how Theia produces and distributes Level-2A data, corrected for atmospheric effects thanks to the MAJA software developed in coordination between CNES/CESBIO and DLR.**
 
 **MACCS** (Multi-sensor Atmospheric Correction and Cloud Screening) combined with 
 **ATCOR** (Atmospheric and Topographic Correction) generated **MAJA** 
@@ -123,8 +123,15 @@ Sentinel-2 Level 2A products from Level 1C products.
 
 To convert TOA to BOA values, **MAJA** contains modules to estimate the H20 content and correct the atmospheric absorption (See [SMAC](https://labo.obs-mip.fr/multitemp/python/smac-atmospheric-correction-python/)). Inspired in ATCOR, also correct the influence of the slope and adjacency effect in reflectance values.
 
-For cloud detection, **MAJA** works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes/breaks in the series. However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See [Sanchez et al. 2020](https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473)).
+For cloud detection, **MAJA** works with time-series reflectance values and suppose that surface without clouds are stable in time. Consequently, clouds and cloud shadows are detected analyzing changes in the series (using a cloud-free composites). However, this assumption could be a problem in strongly affected by clouds regions like the Peruvian/Brazilian Amazon (See [Sanchez et al. 2020](https://paperpile.com/app/p/a8ea2526-d728-094d-8c1e-7e8545753473)).
 
-**Describe the main differences in the production chains compared to the ESA Level-2A data.**
+**3.2. Describe the main differences in the production chains compared to the ESA Level-2A data.**
 
-Unlike **Sen2Cor**, **MAJA** 
+The main differences are:
+
+  - Theia use **MAJA** while ESA use **Sen2cor**.
+  
+  - Theia level 2A use composites (continuously updated) to enhance aerosol detection and cloud detection.
+  
+  - ESA produces a pixel classification map (SC) while Theia only generates a cloud mask (cloud, cloud shadow, and cirrus).  
+  

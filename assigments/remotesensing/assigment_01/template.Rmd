@@ -37,7 +37,7 @@ readr::write_lines(htmlhead, path = "header.html")
 
 # Question N° 01
 
-**Find information about flight direction and polarizations in the metadata folder**d
+**Find information about flight direction and polarizations in the metadata folder**
 
 In metadata folder we can find the following properties:
 

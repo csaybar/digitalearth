@@ -1,0 +1,3 @@
+FROM postgis/postgis
+# Expose default postgres port
+EXPOSE 5432

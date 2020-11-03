@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Spatial Databases assignment</title>
+  <meta name="description" content="Spatial Databases assignment" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Spatial Databases assignment" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Spatial Databases assignment" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="question-1.html"/>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="possible-context.html"><a href="possible-context.html"><i class="fa fa-check"></i><b>1</b> Possible context</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="possible-context.html"><a href="possible-context.html#create-and-run-a-container-with-postgis"><i class="fa fa-check"></i><b>1.1</b> Create and run a container with POSTGIS</a></li>
+<li class="chapter" data-level="1.2" data-path="possible-context.html"><a href="possible-context.html#load-all-necessary-r-libraries"><i class="fa fa-check"></i><b>1.2</b> Load all necessary R libraries</a></li>
+<li class="chapter" data-level="1.3" data-path="possible-context.html"><a href="possible-context.html#create-a-connection-to-the-postgres-database"><i class="fa fa-check"></i><b>1.3</b> Create a connection to the Postgres database</a></li>
+<li class="chapter" data-level="1.4" data-path="possible-context.html"><a href="possible-context.html#create-the-table-capitals_world-and-insert-the-demo-data."><i class="fa fa-check"></i><b>1.4</b> Create the table capitals_world and insert the demo data.</a></li>
+<li class="chapter" data-level="1.5" data-path="possible-context.html"><a href="possible-context.html#create-a-simple-query"><i class="fa fa-check"></i><b>1.5</b> Create a simple query</a></li>
+<li class="chapter" data-level="1.6" data-path="possible-context.html"><a href="possible-context.html#create-a-view"><i class="fa fa-check"></i><b>1.6</b> Create a View</a></li>
+<li class="chapter" data-level="1.7" data-path="possible-context.html"><a href="possible-context.html#subqueries"><i class="fa fa-check"></i><b>1.7</b> Subqueries</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="question-1.html"><a href="question-1.html"><i class="fa fa-check"></i><b>2</b> Question 1:</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatial Databases assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Spatial Databases assignment</h1>
+<p class="author"><em><b>Name:</b> Cesar Luis Aybar Camacho</em></p>
+<p class="author"><em><b>Program:</b> Erasmus Copernicus Master in Digital Earth</em></p>
+<p class="author"><em><b>Code:</b> s1078735</em></p>
+<p class="date"><em><b>Date:</b> 03 November, 2020</em></p>
+</div>
+<div id="possible-context" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Possible context</h1>
+<p><strong>You are employed by the company selecdis ltd., which operates a database containing data about countries and capitals of the world. The database is used to query statistical information, which is used by your colleagues to make some dubious decisions to accelerate their world domination plans. Your colleagues know a bit of SQL, but the queries they need are too complex for them and therefore ask you to “make it easier”. With rolling eyes you begin to think of a procedure and realise that the queries they need are indeed complex (of course not too complex for you), but there are only few of them, which they use over and over again . . .</strong></p>
+<div id="create-and-run-a-container-with-postgis" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Create and run a container with POSTGIS</h2>
+<ol style="list-style-type: decimal">
+<li>Create a Dockerfile (expose the port, see below), and run:</li>
+</ol>
+<p><strong><code>docker build . --tag csaybar/postgis</code></strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="possible-context.html#cb1-1" aria-hidden="true" tabindex="-1"></a>FROM postgis<span class="sc">/</span>postgis</span>
+<span id="cb1-2"><a href="possible-context.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Expose default postgres port</span></span>
+<span id="cb1-3"><a href="possible-context.html#cb1-3" aria-hidden="true" tabindex="-1"></a>EXPOSE <span class="dv">5432</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a file <code>docker-compose.yaml</code> (with the text below) and execute in console:</li>
+</ol>
+<p><strong><code>docker-compose up -d</code></strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="possible-context.html#cb2-1" aria-hidden="true" tabindex="-1"></a>version<span class="sc">:</span> <span class="st">&#39;0.1&#39;</span></span>
+<span id="cb2-2"><a href="possible-context.html#cb2-2" aria-hidden="true" tabindex="-1"></a>services<span class="sc">:</span></span>
+<span id="cb2-3"><a href="possible-context.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  database<span class="sc">:</span></span>
+<span id="cb2-4"><a href="possible-context.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    image<span class="sc">:</span> csaybar<span class="sc">/</span>postgis<span class="sc">:</span>v0<span class="fl">.1</span> <span class="co"># Latest official PostGIS version</span></span>
+<span id="cb2-5"><a href="possible-context.html#cb2-5" aria-hidden="true" tabindex="-1"></a>    env_file<span class="sc">:</span></span>
+<span id="cb2-6"><a href="possible-context.html#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> database.env <span class="co"># Configure postgres</span></span>
+<span id="cb2-7"><a href="possible-context.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    volumes<span class="sc">:</span></span>
+<span id="cb2-8"><a href="possible-context.html#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> database<span class="sc">-</span>data<span class="sc">:</span><span class="er">/</span>var<span class="sc">/</span>lib<span class="sc">/</span>postgresql<span class="sc">/</span>data<span class="sc">/</span> <span class="co"># persist data even if container shuts down</span></span>
+<span id="cb2-9"><a href="possible-context.html#cb2-9" aria-hidden="true" tabindex="-1"></a>    ports<span class="sc">:</span></span>
+<span id="cb2-10"><a href="possible-context.html#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="st">&quot;5432:5432&quot;</span></span>
+<span id="cb2-11"><a href="possible-context.html#cb2-11" aria-hidden="true" tabindex="-1"></a>volumes<span class="sc">:</span></span>
+<span id="cb2-12"><a href="possible-context.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  database<span class="sc">-</span>data<span class="sc">:</span> </span></code></pre></div>
+<p>All the files are available <a href="https://github.com/csaybar/digitalearth/tree/master/assigments/spatial_dataset">here</a></p>
+</div>
+<div id="load-all-necessary-r-libraries" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Load all necessary R libraries</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="possible-context.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;RPostgreSQL&quot;</span>)</span>
+<span id="cb3-2"><a href="possible-context.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;../postgis/utils.R&quot;</span>) <span class="co"># Utils to use POSTGIS with R!</span></span></code></pre></div>
+</div>
+<div id="create-a-connection-to-the-postgres-database" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Create a connection to the Postgres database</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="possible-context.html#cb4-1" aria-hidden="true" tabindex="-1"></a>drv <span class="ot">&lt;-</span> <span class="fu">dbDriver</span>(<span class="st">&quot;PostgreSQL&quot;</span>) <span class="co"># load the PostgreSQL driver</span></span>
+<span id="cb4-2"><a href="possible-context.html#cb4-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> RPostgreSQL<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
+<span id="cb4-3"><a href="possible-context.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">drv =</span> drv, </span>
+<span id="cb4-4"><a href="possible-context.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">&quot;spdb_course&quot;</span>,</span>
+<span id="cb4-5"><a href="possible-context.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>, </span>
+<span id="cb4-6"><a href="possible-context.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;csaybar&quot;</span>, </span>
+<span id="cb4-7"><a href="possible-context.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;lesly&quot;</span>,</span>
+<span id="cb4-8"><a href="possible-context.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">port =</span> <span class="dv">5432</span></span>
+<span id="cb4-9"><a href="possible-context.html#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="create-the-table-capitals_world-and-insert-the-demo-data." class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Create the table capitals_world and insert the demo data.</h2>
+<p><code>getSQL</code> is a R function that permits us properly transform a <code>*.sql</code> file into a R character.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="possible-context.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbSendQuery</span>(con, <span class="fu">getSQL</span>(<span class="st">&quot;E03_data.sql&quot;</span>)) <span class="co"># Execute a query on the database</span></span></code></pre></div>
+</div>
+<div id="create-a-simple-query" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Create a simple query</h2>
+<p>Select the 20 largest cities only.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="possible-context.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(con, <span class="st">&quot;SELECT * FROM capitals_world ORDER BY population DESC LIMIT 20;&quot;</span>)</span></code></pre></div>
+<pre><code>##     id        country         city population
+## 1   32          China      Beijing   21150000
+## 2   70          Japan        Tokyo   13159400
+## 3  144         Russia       Moscow   11514300
+## 4   88    South Korea        Seoul    9794300
+## 5  158      Singapore    Singapore    9576700
+## 6   62      Indonesia      Jakarta    9512300
+## 7  113         Mexico  Mexiko City    8851100
+## 8  176       Thailand      Bangkok    8305200
+## 9  138           Peru         Lima    8275800
+## 10 195 United Kingdom       London    8170000
+## 11  64           Iran      Teheran    8154000
+## 12   2          Egypt        Cairo    7947100
+## 13  83       Colombia       Bogotá    7878800
+## 14 150   Saudi-Arabia         Riad    7717500
+## 15  63           Iraq      Baghdad    7180900
+## 16  16     Bangladesh        Dhaka    6970100
+## 17 197        Vietnam        Hanoi    6451900
+## 18   6         Angola       Luanda    6377200
+## 19   9      Argentina Buenos Aires    5383500
+## 20  31          Chile     Santiago    5382300</code></pre>
+</div>
+<div id="create-a-view" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Create a View</h2>
+<p>A view is a virtual (pseudo) table that can be queried. The lines below explain how to create a VIEW of the 20 largest cities only.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="possible-context.html#cb8-1" aria-hidden="true" tabindex="-1"></a>statement <span class="ot">&lt;-</span> <span class="st">&quot;CREATE VIEW capitals_tops_20 AS&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb8-2"><a href="possible-context.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SELECT * FROM capitals_world ORDER BY population DESC LIMIT 20;&quot;</span></span>
+<span id="cb8-3"><a href="possible-context.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbSendQuery</span>(con, statement) <span class="co"># Execute a query on the database</span></span></code></pre></div>
+<pre><code>## &lt;PostgreSQLResult&gt;</code></pre>
+<p>For updating a table we can use <strong>UPDATE</strong> as is showed below:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="possible-context.html#cb10-1" aria-hidden="true" tabindex="-1"></a>statement <span class="ot">&lt;-</span> <span class="st">&quot;UPDATE capitals_world&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb10-2"><a href="possible-context.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SET population = population + 300000&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb10-3"><a href="possible-context.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;WHERE city = &#39;Singapore&#39;;&quot;</span></span>
+<span id="cb10-4"><a href="possible-context.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dbSendQuery</span>(con, statement) <span class="co"># Execute a query on the database</span></span></code></pre></div>
+<pre><code>## &lt;PostgreSQLResult&gt;</code></pre>
+<p>If we display again the results of the 20 largest cities (capitals_tops_20). We will see that the population of Singapore has been updated.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="possible-context.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(con, <span class="st">&quot;SELECT * FROM capitals_tops_20;&quot;</span>)</span></code></pre></div>
+<pre><code>##     id        country         city population
+## 1   32          China      Beijing   21150000
+## 2   70          Japan        Tokyo   13159400
+## 3  144         Russia       Moscow   11514300
+## 4  158      Singapore    Singapore    9876700
+## 5   88    South Korea        Seoul    9794300
+## 6   62      Indonesia      Jakarta    9512300
+## 7  113         Mexico  Mexiko City    8851100
+## 8  176       Thailand      Bangkok    8305200
+## 9  138           Peru         Lima    8275800
+## 10 195 United Kingdom       London    8170000
+## 11  64           Iran      Teheran    8154000
+## 12   2          Egypt        Cairo    7947100
+## 13  83       Colombia       Bogotá    7878800
+## 14 150   Saudi-Arabia         Riad    7717500
+## 15  63           Iraq      Baghdad    7180900
+## 16  16     Bangladesh        Dhaka    6970100
+## 17 197        Vietnam        Hanoi    6451900
+## 18   6         Angola       Luanda    6377200
+## 19   9      Argentina Buenos Aires    5383500
+## 20  31          Chile     Santiago    5382300</code></pre>
+</div>
+<div id="subqueries" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Subqueries</h2>
+<p>A subquery is a SQL query within a query. We can use this feature to create complex queries. In the example below, we select all capitals with a population above the average.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="possible-context.html#cb14-1" aria-hidden="true" tabindex="-1"></a>statement <span class="ot">&lt;-</span> <span class="st">&quot;SELECT *&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb14-2"><a href="possible-context.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;FROM capitals_world&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb14-3"><a href="possible-context.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;WHERE population &gt; (&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb14-4"><a href="possible-context.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;  SELECT AVG(population)&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb14-5"><a href="possible-context.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;  FROM capitals_world&quot;</span> <span class="sc">%|%</span></span>
+<span id="cb14-6"><a href="possible-context.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;);&quot;</span></span>
+<span id="cb14-7"><a href="possible-context.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(con, statement)</span></code></pre></div>
+<pre><code>##     id                            country               city population
+## 1    1                        Afghanistan              Kabul    3289000
+## 2    2                              Egypt              Cairo    7947100
+## 3    4                            Algeria             Algier    2159000
+## 4    6                             Angola             Luanda    6377200
+## 5    9                          Argentina       Buenos Aires    5383500
+## 6   11                         Azerbaijan               Baku    2204200
+## 7   12                           Ethiopia        Addis Abeba    3194000
+## 8   16                         Bangladesh              Dhaka    6970100
+## 9   26                             Brazil           Brasilia    2914800
+## 10  31                              Chile           Santiago    5382300
+## 11  32                              China            Beijing   21150000
+## 12  36                            Germany             Berlin    3478600
+## 13  40                            Equador              Quito    2239200
+## 14  42 Côte d&#39;Ivoire (seat of government)            Abidjan    3682000
+## 15  48                             France              Paris    2254300
+## 16  52                              Ghana              Accra    4010000
+## 17  55                          Guatemala     Guatemala City    3354000
+## 18  59                              Haiti     Port-au-Prince    3093700
+## 19  62                          Indonesia            Jakarta    9512300
+## 20  63                               Iraq            Baghdad    7180900
+## 21  64                               Iran            Teheran    8154000
+## 22  68                              Italy               Rome    3997500
+## 23  70                              Japan              Tokyo   13159400
+## 24  73                             Jordan              Amman    4000000
+## 25  75                           Cameroon            Yaoundé    1881900
+## 26  80                              Kenya            Nairobi    3138400
+## 27  83                           Colombia             Bogotá    7878800
+## 28  85        Congo, Democratic Republic            Kinshasa    4655300
+## 29  87                        North Korea          Pyongyang    3255300
+## 30  88                        South Korea              Seoul    9794300
+## 31  91                               Cuba            Havanna    2106100
+## 32 113                             Mexico        Mexiko City    8851100
+## 33 131                            Austria             Vienna    1840573
+## 34 138                               Peru               Lima    8275800
+## 35 141                           Portugal             Lisbon    2731500
+## 36 143                            Romania          Bucharest    1883400
+## 37 144                             Russia             Moscow   11514300
+## 38 150                       Saudi-Arabia               Riad    7717500
+## 39 161                            Somalia         Mogadischu    2265000
+## 40 162                              Spain             Madrid    3142000
+## 41 167             South Africa (de jure) Pretoria (Tshwane)    2921500
+## 42 168  South Africa (seat of government)          Cape Town    3740000
+## 43 173                              Syria           Damascus    2574000
+## 44 176                           Thailand            Bangkok    8305200
+## 45 183                             Turkey             Ankara    5270600
+## 46 187                            Ukraine               Kyiv    2567000
+## 47 190                         Uzbekistan          Taschkent    2393200
+## 48 193                          Venezuela            Caracas    3300300
+## 49 195                     United Kingdom             London    8170000
+## 50 197                            Vietnam              Hanoi    6451900
+## 51 198                            Belarus              Minsk    1921800
+## 52 158                          Singapore          Singapore    9876700</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="question-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

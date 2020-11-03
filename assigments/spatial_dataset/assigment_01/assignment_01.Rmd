@@ -1,0 +1,157 @@
+---
+title: "Spatial Databases assignment"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+- name: "<b>Code:</b> s1078735"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE, warning=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+```
+
+# Possible context
+
+**You are employed by the company selecdis ltd., which operates a database containing data about countries and capitals of the world. The database is used to query statistical information, which is used by your colleagues to make some dubious decisions to accelerate their world domination plans. Your colleagues know a bit of SQL, but the queries they need are too complex for them and therefore ask you to "make it easier". With rolling eyes you begin to think of a procedure and realise that the queries they need are indeed complex (of course not too complex for you), but there are only few of them, which they use over and over again . . .**
+
+## Create and run a container with POSTGIS
+
+1. Create a Dockerfile (expose the port, see below), and run: 
+
+**`docker build . --tag csaybar/postgis`**
+
+```{r eval=FALSE}
+FROM postgis/postgis
+# Expose default postgres port
+EXPOSE 5432
+```
+
+2. Create a file `docker-compose.yaml` (with the text below) and execute in console: 
+
+**`docker-compose up -d`**
+
+```{r eval=FALSE}
+version: '0.1'
+services:
+  database:
+    image: csaybar/postgis:v0.1 # Latest official PostGIS version
+    env_file:
+      - database.env # Configure postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    ports:
+      - "5432:5432"
+volumes:
+  database-data: 
+```
+
+All the files are available [here](https://github.com/csaybar/digitalearth/tree/master/assigments/spatial_dataset)
+
+## Load all necessary R libraries
+
+```{r warning=FALSE,message=FALSE}
+library("RPostgreSQL")
+source("../postgis/utils.R") # Utils to use POSTGIS with R!
+```
+
+## Create a connection to the Postgres database
+
+```{r}
+drv <- dbDriver("PostgreSQL") # load the PostgreSQL driver
+con <- RPostgreSQL::dbConnect(
+  drv = drv, 
+  dbname = "spdb_course",
+  host = "localhost", 
+  user = "csaybar", 
+  password = "lesly",
+  port = 5432
+)
+```
+
+## Create the table capitals_world and insert the demo data.
+`getSQL` is a R function that permits us properly transform a `*.sql` file into a R character.
+
+```{r eval=FALSE}
+dbSendQuery(con, getSQL("E03_data.sql")) # Execute a query on the database
+```
+
+## Create a simple query
+
+Select the 20 largest cities only.
+
+```{r}
+dbGetQuery(con, "SELECT * FROM capitals_world ORDER BY population DESC LIMIT 20;")
+```
+
+
+## Create a View
+
+A view is a virtual (pseudo) table that can be queried. The lines below explain how to create a VIEW of the 20 largest cities only.
+
+```{r eval=FALSE}
+statement <- "CREATE VIEW capitals_tops_20 AS" %|%
+  "SELECT * FROM capitals_world ORDER BY population DESC LIMIT 20;"
+dbSendQuery(con, statement) # Execute a query on the database
+```
+
+For updating a table we can use **UPDATE** as is showed below:
+
+```{r eval=FALSE}
+statement <- "UPDATE capitals_world" %|%
+  "SET population = population + 300000" %|%
+  "WHERE city = 'Singapore';"
+dbSendQuery(con, statement) # Execute a query on the database
+```
+
+If we display again the results of the 20 largest cities (capitals_tops_20). We will see that the population of Singapore has been updated.
+
+```{r}
+dbGetQuery(con, "SELECT * FROM capitals_tops_20;")
+```
+
+
+## Subqueries
+
+A subquery is a SQL query within a query. We can use this feature to create complex queries. In the example below, we select all capitals with a population above the average.
+
+```{r}
+statement <- "SELECT *" %|%
+  "FROM capitals_world" %|%
+  "WHERE population > (" %|%
+  "  SELECT AVG(population)" %|%
+  "  FROM capitals_world" %|%
+  ");"
+dbGetQuery(con, statement)
+```
+
+# Question 1:
+
+**Such queries with subqueries etc. can become very complex. An example like this (i.e., selecting all capitals with a population above the average) is common and might be repeated several times or even used in subsequent queries. Which feature of a database system would you use to manage this?**
+
+I will use a **view**. **Views** in PostgreSQL helps us to create dynamic tables. It is specially useful when tables are changing frequently and we are interesting in a specific summary or statistic.
+
+

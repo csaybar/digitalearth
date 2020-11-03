@@ -1,0 +1,12 @@
+version: '0.1'
+services:
+  database:
+    image: csaybar/postgis:v0.1 # Latest official PostGIS version
+    env_file:
+      - database.env # Configure postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    ports:
+      - "5432:5432"
+volumes:
+  database-data: 

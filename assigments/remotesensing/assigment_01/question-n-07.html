@@ -108,7 +108,23 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
             <section class="normal" id="section-">
 <div id="question-n-07" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Question N° 07</h1>
-<p><strong>Perform comparison between change detection results derived from VV against VH polarizations. Describe your results.</strong></p>
+<p><strong>Perform comparison between change detection results derived from VV
+against VH polarizations. Describe your results.</strong></p>
+<p>Change detection algorithm inside <strong>SNAP</strong>, use a log ratio between the
+first and the second image (See this <a href="https://forum.step.esa.int/t/change-detection-which-algorithm-is-implemented/4867">link</a>). <span class="math display">\[DL = log(\frac{I_f}{I_g})\]</span> Where <strong>If</strong>
+represent the values from the first image and <strong>Ig</strong> from the second
+one.</p>
+<center>
+<p><img src="img/q7_01.png" style="width:  350px;height: 350px"/>
+<img src="img/q7_02.png" style="width:  350px;height: 350px"/>
+<img src="img/q7_03.png" style="width:  350px;height: 350px"/></p>
+</center>
+<p>In general, the brightness (high) and dark (low) values show us the
+changes. In the image <strong>VV</strong>, we can identify three specific areas where
+the ratio shows us changes. The first region (See image VV) is located
+inside a mine (mining tailings), and the second and third are inside a lake (See
+high-resolution image). As you can observe, all those areas are related to the presence of water that, usually, present <span class="math inline">\(sigma_0\)</span> naught values near zero. Therefore, it is more probable that these changes are related to the use of a
+ratio division into extremely low values (e.g. log (0.001 / 0.0001) = 2.3) rather than real changes itself. With respect to the image <strong>VH</strong>, we can see only one area with high ratio values, and it falls within a dry forest. Therefore, it is very likely that this change detected is related to a alteration in the landscape.</p>
 </div>
             </section>
 

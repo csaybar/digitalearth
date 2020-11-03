@@ -108,31 +108,56 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
             <section class="normal" id="section-">
 <div id="question-n-04" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Question N° 04</h1>
-<p><strong>Inspect the intensity VV and the intensity VH band. Zoom in to the different areas (for example agriculture area, urban areas, river, etc.). Create a screenshot, and describe the differences between VV and VH polarization for each of the example areas.</strong></p>
-<p><strong>VV</strong> and <strong>VH</strong> (radar backscatter) contains information about the Earth’s surface, their intensity are driven by:</p>
+<p><strong>Inspect the intensity VV and the intensity VH band. Zoom in to the
+different areas (for example agriculture area, urban areas, river,
+etc.). Create a screenshot, and describe the differences between VV and
+VH polarization for each of the example areas.</strong></p>
+<p><strong>VV</strong> and <strong>VH</strong> values are driven by:</p>
 <ul>
 <li><strong>The frequency or wavelength:</strong> Radar parameter</li>
 <li><strong>Incidence angle:</strong> Radar parameter</li>
 <li><strong>Dielectric constant:</strong> Surface parameter</li>
 <li><strong>Surface roughness relative to the wavelength:</strong> Surface parameter</li>
 </ul>
-<p>The SAR images were taken with a different of <strong>45 days</strong>. Therefore, could exist high different of soil moisture between both images.</p>
 <p><strong>Agriculture:</strong></p>
 <center>
-<p><img src="img/agriculture_01.png" style="width:  250px;height: 250px"/> <img src="img/agriculture_02.png" style="width:  250px;height: 250px"/> <img src="img/agriculture_03.png" style="width:  250px;height: 250px"/></p>
+<p><img src="img/agriculture_01.png" style="width:  250px;height: 250px"/>
+<img src="img/agriculture_02.png" style="width:  250px;height: 250px"/>
+<img src="img/agriculture_03.png" style="width:  250px;height: 250px"/></p>
 </center>
-<p>Overall, it can be said that <strong>VH</strong> is darker than <strong>VV</strong>. It also manifests more spatial variance and correspondence to the tilled agricultural fields if we compare with the high-resolution optical image. In both images, dark values seems to be related to <strong>rough surface scattering</strong>, while gray and white values with the <strong>volume scattering</strong> and <strong>double bounce</strong> respectively.</p>
+<p>Overall, it can be said that <strong>VH</strong> values are darker (lower) than
+<strong>VV</strong>. <strong>VH</strong> also show us more spatial variance and correspondence to
+the crop fields if we compare it with the high-resolution
+optical image. In both images, dark values seems to be related to
+<strong>rough surface scattering</strong>, while gray and white values with the
+<strong>volume scattering</strong> and <strong>double bounce</strong> respectively.</p>
 <p><strong>Urban areas:</strong></p>
 <center>
-<p><img src="img/airport_01.png" style="width:  250px;height: 250px"/> <img src="img/airport_02.png" style="width:  250px;height: 250px"/> <img src="img/airport_03.png" style="width:  250px;height: 250px"/></p>
-<p><img src="img/urban_01.png" style="width:  250px;height: 250px"/> <img src="img/urban_02.png" style="width:  250px;height: 250px"/> <img src="img/urban_03.png" style="width:  250px;height: 250px"/></p>
+<p><img src="img/airport_01.png" style="width:  250px;height: 250px"/>
+<img src="img/airport_02.png" style="width:  250px;height: 250px"/>
+<img src="img/airport_03.png" style="width:  250px;height: 250px"/></p>
+<p><img src="img/urban_01.png" style="width:  250px;height: 250px"/>
+<img src="img/urban_02.png" style="width:  250px;height: 250px"/>
+<img src="img/urban_03.png" style="width:  250px;height: 250px"/></p>
 </center>
-<p>Like the zoom in agriculture areas, in urban areas <strong>VH</strong> are darker than <strong>VV</strong> values. In SAR images urban areas almost always present the brightest pixels since that the dominant mechanism is the <strong>double bounce</strong>. However, specific regions like airstrip or other plane/smooth could present low backscattered intensity.</p>
+<p>Like agriculture images, in urban areas, <strong>VH</strong> values are darker
+(lower) than <strong>VV</strong>. In SAR images urban areas almost always represent
+the brightest pixels since that the dominant mechanism is the <strong>double
+bounce</strong>. However, specific regions like airstrip or other plane/smooth
+could present low backscattered intensity.</p>
 <p><strong>Water bodies</strong></p>
 <center>
-<p><img src="img/water_01.png" style="width:  250px;height: 250px"/> <img src="img/water_02.png" style="width:  250px;height: 250px"/> <img src="img/water_03.png" style="width:  250px;height: 250px"/></p>
+<img src="img/water_01.png" style="width:  250px;height: 250px"/>
+<img src="img/water_02.png" style="width:  250px;height: 250px"/>
+<img src="img/water_03.png" style="width:  250px;height: 250px"/>
 </center>
-<p>Water bodies are dark in both <strong>VV</strong> and <strong>VH</strong> imagesfor two reasons: the high dialectric constant of the water (~80) and the smooth of the surface of the water.</p>
+<p>Calm water bodies (see image above) are dark in both <strong>VV</strong> and <strong>VH</strong>
+images. According to <a href="https://paperpile.com/app/p/6ff7cc23-745c-0534-b56f-d919a767ffa1">Solbø and Solheim
+2005</a>,
+it is due for two reasons: the high dialectric constant of the water
+(~80) and the smooth of the surface of the water. However in rough
+water surfaces like rivers (see urban areas images above) is it possible
+to have parts with higher backscatter due to the incoming angle.</p>
 </div>
             </section>
 

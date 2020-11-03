@@ -109,7 +109,17 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
 <div id="question-n-05" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Question N° 05</h1>
 <p><strong>Why do we need to apply orbit file correction?</strong></p>
-<p>This is a SNAP inline step for creating a file with accurate satellite position information that will help to improve the geocoding and other SAR processing results. The file created contains accurate satellite position and velocity information. See <a href="https://forum.step.esa.int/t/what-does-the-apply-orbit-file-for/8620/3">What does the APPLY orbit file for？</a>.</p>
+<p>Orbit state vector (available inside SAR metadata) contains information
+about the image localization that generally is not accurate. The
+<strong>precise orbits of satellites are determined after several days</strong> and
+are available days-to-weeks after the generation of the product (See
+<a href="https://pyrosar.readthedocs.io/en/latest/general/OSV.html">link</a>). The
+<strong>orbit file correction</strong> is a SNAP inline step for downloading and
+updating the SAR orbit state vector. This step will help to improve the
+image geocoding. See <a href="https://forum.step.esa.int/t/what-does-the-apply-orbit-file-for/8620/3">What does
+the APPLY orbit file
+for？</a>
+for more information.</p>
 <p><img src="img/img_02.png" /></p>
 </div>
             </section>

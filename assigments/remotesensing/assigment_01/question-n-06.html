@@ -108,29 +108,40 @@ document.write('<div class="logos"><img src="https://user-images.githubuserconte
             <section class="normal" id="section-">
 <div id="question-n-06" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Question N° 06</h1>
-<p><strong>There are three products available, sigma0, gamma0, and beta0. Describe each of them. For which application can we use sigma, gamma, or beta?</strong></p>
-<p><span class="math inline">\(sigma_0\)</span>, <span class="math inline">\(gamma_0\)</span> and <span class="math inline">\(beta_0\)</span> are the possible outputs after application a calibration (Radar &gt; Radiometric &gt; Calibrate).</p>
+<p><strong>There are three products available, sigma0, gamma0, and beta0.
+Describe each of them. For which application can we use sigma, gamma, or
+beta?</strong></p>
+<p><span class="math inline">\(sigma_0\)</span>, <span class="math inline">\(gamma_0\)</span> and <span class="math inline">\(beta_0\)</span> are the possible outputs after
+calibrate a SAR image (Radar &gt; Radiometric &gt; Calibrate). The objective
+of SAR calibration is to provide images in which the pixel values can be
+directly related to the radar backscatter of the scene.</p>
 <p><img src="img/img_03.png" /></p>
-<p>The illustration below show the reference areas for the three radar backscatter conventions: beta, sigma, and gamma naught.</p>
+<p>The illustration below show the reference areas for the three radar
+backscatter conventions: beta, sigma, and gamma naught.</p>
 <center>
-<img src=img/img_04.jpg>
+<p><img src="img/img_04.jpg"/></p>
 </center>
 <ul>
-<li><span class="math inline">\(beta_0\)</span> are the results after convert DN (16-bit) to radar brightness:</li>
+<li><span class="math inline">\(beta_0\)</span> (radar brightness coefficient) are the results after convert DN (16-bit) to radar brightness:</li>
 </ul>
 <p><span class="math inline">\(beta_0 = calFactor * DN^2\)</span></p>
 <ul>
-<li><span class="math inline">\(sigma_0\)</span> are the results after apply illumination correction to radar brightness:</li>
+<li><span class="math inline">\(sigma_0\)</span> (backscatering coeficient) are the results after apply illumination correction to radar brightness:</li>
 </ul>
 <p><span class="math inline">\(sigma_0 = beta_0 * sin(i_{x, y})\)</span></p>
 <p>where <span class="math inline">\(sin(i_{x, y})\)</span> is the sin of local incidence angle.</p>
 <ul>
-<li>Finally, <span class="math inline">\(gamma_0\)</span> are the results after apply illumination correction suitable for volume scatters.</li>
+<li>Finally, <span class="math inline">\(gamma_0\)</span> is the backscatering coeficient normalized. It is calculate
+after applied the cosine of the incidence angle to sigma values.</li>
 </ul>
 <p><span class="math inline">\(gamma_0 = beta_0 * tan(i_{x, y})\)</span></p>
 <p>where <span class="math inline">\(tan(i_{x, y})\)</span> is the tan of local incidence angle.</p>
-<p>According with <a href="https://paperpile.com/app/p/26b841f6-8b9e-0076-be0d-d3b60e3d8ece">Atwood, et. al 2016</a>, <a href="https://paperpile.com/app/p/1c6b7c35-a7aa-025a-bb98-6a276c90cd40">Babu, et. al 2016</a>, and in our <em>visual interpretation,</em> there is no significant differences between <span class="math inline">\(sigma_0\)</span> and <span class="math inline">\(gamma_0\)</span> results. The ideal radiometric correction, should remove completely the influence of local incidence angle (see image below).</p>
-<p><img src="img/img_05.jpg" /></p>
+<p>According with <a href="https://paperpile.com/app/p/26b841f6-8b9e-0076-be0d-d3b60e3d8ece">Atwood, et. al
+2016</a>,
+<a href="https://paperpile.com/app/p/1c6b7c35-a7aa-025a-bb98-6a276c90cd40">Babu, et. al
+2016</a>,
+and in our <em>visual interpretation of the images,</em> there is no significant differences
+between <span class="math inline">\(beta_0\)</span>, <span class="math inline">\(sigma_0\)</span> and <span class="math inline">\(gamma_0\)</span> results.</p>
 </div>
             </section>
 

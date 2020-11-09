@@ -2,7 +2,7 @@
 title: "Salzburg City Population Analysis"
 output: 
   flexdashboard::flex_dashboard:
-    source_code: "https://github.com/csaybar/digitalearth/assigments/carto_proj/assigment_02"
+    source_code: "https://github.com/csaybar/digitalearth/tree/master/assigments/carto_proj/assigment_02"
     storyboard: no
     social: menu
     source: embed
@@ -34,13 +34,13 @@ Salzburg is the capital city of the State of Salzburg and fourth-largest city in
 
 **`Salzburg population density map`**
 
-From the 33 Salzburg districts we observed that 10 of them present a population density greater than  **3000** **people/ km<sup>2</sup>**. These are: Neustadt, Lehen-Nord, Elisabeth-Vorstadt, Liefering-Ost, Taxham, Schallmoos, Maxglan, Liefering-West, Aiglhof/Innere Riedenburg, and Rechte Altstadt/Andräviertel. 
+From the 33 Salzburg districts we observed that 10 of them present a population density greater than  **3000** **people/ km<sup>2</sup>** (red ones). These are: Neustadt, Lehen-Nord, Elisabeth-Vorstadt, Liefering-Ost, Taxham, Schallmoos, Maxglan, Liefering-West, Aiglhof/Innere Riedenburg, and Rechte Altstadt/Andräviertel. 
 
-On the other hand, Hellbrunn and Gaisberg were the district with the lowest population density presenting a value of 863 and 430 **people/ km<sup>2</sup>** respectively.
+On the other hand, Hellbrunn and Gaisberg were the district with the lowest population density (yellow one) presenting a value of 863 and 430 **people/ km<sup>2</sup>** respectively. 
 
 **`Salzburg population trends map`**
 
-In the city of Salzburg we observed that 31 districts present a positive tau and a pvalue lower than 0.01. The Parsch Ost/Aigen and Aigen/Glas districts showed the highest population growth rate.
+In the city of Salzburg we observed that 31 districts present a positive tau and a pvalue lower than 0.01. The **Parsch Ost/Aigen** and **Aigen/Glas** districts showed the highest population growth rate.
 
 **`Salzburg population statistics`**
 

@@ -110,8 +110,8 @@ map_plotly_graph <- function(states) {
                   color = tau,
                   fake2 = population,
                   group = name),
-              size = 0.45,
-              alpha = 0.5) +
+              size = 0.6,
+              alpha = 0.6) +
     scale_colour_gradient2() +
     xlab("") +
     ylab("Standard score") +

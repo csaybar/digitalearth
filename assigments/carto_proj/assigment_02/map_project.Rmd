@@ -42,9 +42,9 @@ On the other hand, Hellbrunn and Gaisberg were the district with the lowest popu
 
 In the city of Salzburg we observed that 31 districts present a positive tau and a pvalue lower than 0.01. The **Parsch Ost/Aigen** and **Aigen/Glas** districts showed the highest population growth rate.
 
-**`Salzburg population statistics`**
+<!-- **`Salzburg population statistics`** -->
 
-Display the **standard score** values can give us a better idea of the growth rates of each district.
+<!-- Display the **standard score** values can give us a better idea of the growth rates of each district. -->
 
 Column {.tabset}
 -------------------------------------
@@ -70,17 +70,9 @@ states$slope <- map_create_trends(states, estimator = "slope")
 map_tau(states)
 ```   
 
-### Salzburg population statistics
+<!-- ### Salzburg population statistics -->
 
-```{r include, echo = FALSE}
-pp <- map_plotly_graph(states)
-htmlwidgets::saveWidget(pp, "plot.html")
-htmltools::tags$iframe(
-  src=file.path(getwd(), "plot.html"),
-  width="100%",
-  height="100%",
-  scrolling="no",
-  seamless="seamless",
-  frameBorder="0"
-)
-```
+<!-- ```{r include, echo = FALSE} -->
+<!-- pp <- map_plotly_graph(states) -->
+<!-- pp -->
+<!-- ``` -->

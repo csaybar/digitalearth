@@ -1,0 +1,111 @@
+---
+title: "How close are kindergardens and water containers to ÖJAB-Haus Salzburg?"
+output:
+  flexdashboard::flex_dashboard:
+    storyboard: yes
+    social: menu
+    source: embed
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+library(sf)
+library(plotly)
+library(ggplot2)
+library(leaflet)
+library(mapview)
+library(htmltools)
+source("functions.R")
+```
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+dirfile_ojab <- "data/OJAB/Points.shp"
+dirfile_kinde <- "data/kindergarden.shp.shp"
+dirfile_drive_time <- "data/01_driving_time.geojson" 
+dirfile_drive_distance <- "data/01_driving_distance.geojson" 
+dirfile_walk_distance <- "data/01_walking_time.geojson"
+map_01(dirfile_ojab, dirfile_kinde,
+       dirfile_drive_time, dirfile_drive_distance,
+       dirfile_walk_distance)
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and therefore most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches KG Alpensiedlung after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+### Closest glass waste containers to **ÖJAB-Haus** {data-commentary-width=400}
+
+```{r}
+dirfile_walk_distance <- "data/water_container.shp"
+map_02(dirfile_ojab, dirfile_walk_distance)
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+
+The three closest water containers to **ÖJAB-Haus Salzburg** are less than **1 km <sup> 2 </sup>** away (see purple lines). Reach to any of them would take less than 10 minutes walking.
+
+</div>
+
+### Classification according to the proximity of the **motorways**. {data-commentary-width=400}
+
+```{r}
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+Using the _proximity to highways_ values from the map above, the kindergartens have been classified as <strong>high</strong>, <strong>medium</strong>, <strong>low</strong>, and <strong>very low</strong> risk. 
+</div>
+
+
+### Statistic for each class. {data-commentary-width=400}
+
+```{r}
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+
+In total there are **73 kindergartens** in the Salzburg district, of which **14** are **Very Low**, **19 Low**, **21 Medium**, and **19 High** risks
+
+As the graph on the left shows, kindergartens classified as **High risk** also have the **highest number of students**. This pattern could be related to the population growth that occurs, most of the time, near to important highways.
+
+</div>
+
+### Kindergardens with at least 25 seats. {data-commentary-width=400}
+
+```{r}
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+Considering only the kindergartens with more than 25 seats.  We can observe that the number of kindergartens was reduced by 57% (from 73 to 31). Furthermore, clearly shown that the kindergartens furthest from the cities are the most affected by the filter applied.
+</div>
+
+
+### Kindergardens with at least 25 seats. **Area of influence** {data-commentary-width=400}
+
+
+```{r}
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+Taking 750 meters as a constant value for the range of influence, it can be seen that the kindergartens' services area covers 50% of the Salzburg district.
+
+Although there are better ways to estimate the radius of influence than the euclidean distance (e.g. cost distance or network distance), this information is still very useful for decision makers to know **where to build kindergartens**. 
+
+To find suitable locations, we also recommend taking into account population density and proximity to parks.
+</div>

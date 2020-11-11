@@ -13,7 +13,7 @@ map_base <- function(states) {
       weight = 1,
       opacity = 1,
       color = "black",
-      popup = "<img src=https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/365e45cb-f07a-4c88-a433-10e18063baad/d3iapfh-fc5d77be-fcf5-43a9-b676-83b7553bf246.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMzY1ZTQ1Y2ItZjA3YS00Yzg4LWE0MzMtMTBlMTgwNjNiYWFkXC9kM2lhcGZoLWZjNWQ3N2JlLWZjZjUtNDNhOS1iNjc2LTgzYjc1NTNiZjI0Ni5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.tceQTJ1wQ3r4NdVyDuEdWw9I7aVUVofYWg-4jqVwzAM width=150%>",
+      popup = sprintf("<img src=./data/fig/ggp_%02d.png width=400px></img>",1:nrow(states)),
       fillOpacity = 0.7,
       highlight = highlightOptions(
         weight = 5,
@@ -55,7 +55,7 @@ map_tau <- function(states) {
       opacity = 1,
       color = "black",
       fillOpacity = 0.7,
-      popup = "<img src=https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/365e45cb-f07a-4c88-a433-10e18063baad/d3iapfh-fc5d77be-fcf5-43a9-b676-83b7553bf246.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMzY1ZTQ1Y2ItZjA3YS00Yzg4LWE0MzMtMTBlMTgwNjNiYWFkXC9kM2lhcGZoLWZjNWQ3N2JlLWZjZjUtNDNhOS1iNjc2LTgzYjc1NTNiZjI0Ni5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.tceQTJ1wQ3r4NdVyDuEdWw9I7aVUVofYWg-4jqVwzAM width=150%>",
+      popup = sprintf("<img src=./data/fig/ggp_%02d.png width=400px></img>",1:nrow(states)),
       highlight = highlightOptions(
         weight = 5,
         color = "white",

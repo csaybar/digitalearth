@@ -13,7 +13,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(htmltools)

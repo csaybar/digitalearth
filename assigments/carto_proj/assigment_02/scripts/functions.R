@@ -1,7 +1,6 @@
 map_base <- function(states) {
   bins <- c(0, 1000, 1500, 2000, 2500, 3000, Inf)
   pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
-  
   labels <- sprintf(
     "<strong>%s</strong><br/>%g people / km<sup>2</sup>",
     states$name, states$density
@@ -14,6 +13,7 @@ map_base <- function(states) {
       weight = 1,
       opacity = 1,
       color = "black",
+      popup = "<img src=https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/365e45cb-f07a-4c88-a433-10e18063baad/d3iapfh-fc5d77be-fcf5-43a9-b676-83b7553bf246.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMzY1ZTQ1Y2ItZjA3YS00Yzg4LWE0MzMtMTBlMTgwNjNiYWFkXC9kM2lhcGZoLWZjNWQ3N2JlLWZjZjUtNDNhOS1iNjc2LTgzYjc1NTNiZjI0Ni5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.tceQTJ1wQ3r4NdVyDuEdWw9I7aVUVofYWg-4jqVwzAM width=150%>",
       fillOpacity = 0.7,
       highlight = highlightOptions(
         weight = 5,
@@ -26,7 +26,10 @@ map_base <- function(states) {
         textsize = "15px",
         direction = "auto")) %>%
     addLegend(pal = pal, values = ~density, opacity = 0.7, title = NULL,
-              position = "bottomright")
+              position = "bottomright") %>% 
+    addEasyButton(easyButton(
+      icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+      onClick = JS("function(btn, map){ map.setView([47.79724, 13.05073], 13);}")))
 }
 
 
@@ -52,6 +55,7 @@ map_tau <- function(states) {
       opacity = 1,
       color = "black",
       fillOpacity = 0.7,
+      popup = "<img src=https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/365e45cb-f07a-4c88-a433-10e18063baad/d3iapfh-fc5d77be-fcf5-43a9-b676-83b7553bf246.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMzY1ZTQ1Y2ItZjA3YS00Yzg4LWE0MzMtMTBlMTgwNjNiYWFkXC9kM2lhcGZoLWZjNWQ3N2JlLWZjZjUtNDNhOS1iNjc2LTgzYjc1NTNiZjI0Ni5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.tceQTJ1wQ3r4NdVyDuEdWw9I7aVUVofYWg-4jqVwzAM width=150%>",
       highlight = highlightOptions(
         weight = 5,
         color = "white",
@@ -63,7 +67,10 @@ map_tau <- function(states) {
         textsize = "15px",
         direction = "auto")) %>%
     addLegend(pal = pal, values = ~tau, opacity = 0.7, title = NULL,
-              position = "bottomright")
+              position = "bottomright") %>% 
+    addEasyButton(easyButton(
+      icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+      onClick = JS("function(btn, map){ map.setView([47.79724, 13.05073], 13);}")))
 }
 
 

@@ -240,3 +240,99 @@ map_02 <- function(dirfile_ojab,
                  ))
 }
 
+map_walk4 <- function() {
+  walk4 <- st_read("data/04_walk_4min.geojson", quiet = TRUE) %>% 
+    '['("Name_1")
+  colnames(walk4) <- c("name", "geometry")
+  walk4$pop_message <- sprintf(
+    "<strong>%s</strong></br>4 minute walking area",walk4$name 
+  )
+  walk4
+}
+
+map_walk8 <- function() {
+  walk8 <- st_read("data/04_walk_08min.geojson", quiet = TRUE) %>% 
+    '['("Name_1")
+  colnames(walk8) <- c("name", "geometry")
+  walk8$pop_message <- sprintf(
+    "<strong>%s</strong></br>8 minute walking area",walk8$name 
+  )
+  walk8
+}
+
+map_walk10 <- function() {
+  walk10 <- st_read("data/04_walk_10min.geojson", quiet = TRUE) %>% 
+    '['("Name_1")
+  colnames(walk10) <- c("name", "geometry")
+  walk10$pop_message <- sprintf(
+    "<strong>%s</strong></br>10 minute walking area",walk10$name 
+  )
+  walk10
+}
+
+
+map_03 <- function() {
+  kinder <- read_sf("data/kindergarden.shp.shp", quiet = TRUE) %>% 
+    cbind(st_coordinates(.$geometry)) %>% 
+    '['(.$NAME %in% c('R.k. Pfarr-KG Dompfarre', 
+                           'AGG Vogelweiderstrasse',
+                           'KG Alpensiedlung',
+                           'AGG "English Play Corner"'),)
+  kinder$pop_message_map01  <- paste(
+    sep = "<br/>",
+    sprintf("<strong>name:</strong> %s", kinder$NAME),
+    sprintf("<strong>seats:</strong> %s", kinder$PLAETZE)
+  )
+  
+  map_walk10_obj <- map_walk10()
+  map_walk8_obj <- map_walk8()
+  map_walk4_obj <- map_walk4()
+  
+  kinder %>% 
+    leaflet() %>%
+    setView(13.06702, 47.79488, 14) %>% 
+    addProviderTiles("Esri.WorldImagery", group = "ESRI basemap") %>%
+    addProviderTiles(providers$CartoDB.Voyager, group = "Carto basemap") %>%
+    addPolygons(data = map_walk10_obj,
+                color = "black",
+                fillColor = "#0000ff",
+                weight = 0.5,
+                opacity = 1,
+                fillOpacity = 0.65,
+                group = "Walk time/walk distance", 
+                popup = ~pop_message,
+                dashArray = "2") %>%
+  addPolygons(data = map_walk8_obj, 
+              color = "black",
+              fillColor = "#5252ff",
+              weight = 0.5,
+              opacity = 1,
+              fillOpacity = 0.65,
+              group = "Walk time/walk distance", 
+              popup = ~pop_message,
+              dashArray = "2")  %>%
+    addPolygons(data = map_walk4_obj, 
+                color = "black",
+                fillColor = "#9191ff",
+                weight = 0.5,
+                opacity = 1,
+                fillOpacity = 0.65,
+                group = "Walk time/walk distance", 
+                popup = ~pop_message,
+                dashArray = "2"
+                ) %>% 
+    addCircleMarkers(
+      lng = ~X, 
+      lat = ~Y, 
+      radius =  3,
+      color = "black",
+      opacity = 1,
+      fillOpacity = 1,
+      group = "Kindergartens",
+      popup = ~pop_message_map01
+    )
+}
+
+# sdas <- read_sf("data/kindergarden.shp.shp")
+# mapview(sdas, mp3)
+

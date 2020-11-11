@@ -54,7 +54,7 @@ Column {.tabset}
 ```{r}
 # 2. Create map
 map_base(states)
-```   
+```
 
 ### Salzburg population trends
 
@@ -69,6 +69,7 @@ states$slope <- map_create_trends(states, estimator = "slope")
 # 2. Create map
 map_tau(states)
 ```   
+
 
 <!-- ### Salzburg population statistics -->
 

@@ -1,0 +1,110 @@
+---
+title: "Digital Earth: Big Earth Data Concept - assignment II"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho (s1078735)"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(kableExtra)
+library(formattable)
+library(crayon)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+
+```
+
+# Question N° 01
+
+**Create a document that explains what the script does in your own words and screenshots that shows how you applied it**
+
+EO-Browser is a platform developed by Sinergise that provides open access data to different
+satellite images (i.e Landsat, Modis, Sentinel, etc).
+
+This document explains step by step how to apply the [Braaten-Cohen-Yang](https://www.researchgate.net/publication/281652359_Automated_cloud_and_cloud_shadow_identification_in_Landsat_MSS_imagery_for_temperate_ecosystems) cloud 
+detector algorithm.
+
+1. Choose Sentinel 2A level-1C and define a region of interest (Salzburg).
+
+<center>
+<img src=img/img_01.png width=100%>
+</center>
+
+2. Go to the script monitor and define a composite to display an RGB Sentinel-2 image. 
+
+<center>
+<img src=img/img_02.png width=100%>
+</center>
+
+3. Open the custom script and copy the code below.
+
+<center>
+<img src=img/img_02.png width=100%>
+</center>
+
+[**Code**](https://github.com/sentinel-hub/custom-scripts/tree/master/sentinel-2/cby_cloud_detection)
+ 
+```{js eval=FALSE, results='asis'}
+// Normalized ratio
+function index(x, y) {
+	return (x - y) / (x + y);
+}
+
+// Always the min value returned will 1
+function clip(a) {
+  return Math.max(0, Math.min(1, a));
+}
+
+let bRatio = (B03 - 0.175) / (0.39 - 0.175);
+let NDGR = index(B03, B04);
+let gain = 2.5;
+
+if (B11 > 0.1 && bRatio > 1) { //cloud
+  var v = 0.5*(bRatio - 1);
+  return [0.5*clip(B04), 0.5*clip(B03), 0.5*clip(B02) + v];
+}
+
+if (B11 > 0.1 && bRatio > 0 && NDGR>0) { //cloud
+  var v = 5 * Math.sqrt(bRatio * NDGR);
+  return [0.5 * clip(B04) + v, 0.5 * clip(B03), 0.5 * clip(B02)];
+}
+
+return [B04, B03, B02].map(a => gain * a);
+```
+
+The **Braaten-Cohen-Yang** cloud detection algorithm is based on spectral ratios and thresholds.
+
+$cloud_test = (B1>0.175 & NDGR>0.0) OR  B1>0.39$
+
+$NDGR = \frac{(B3 + B4)}{(B3 - B4)}$
+
+This implementation creates two main functions: **index** which helps us to create a normalized ratio index and **clip** which made that always the min value returned is 1.
+
+EO-Browser permits us to add several results to the base map, each **return** in the code above will add a result to the basemap. The last line `a => gain * a` is equal to realize `function(a){return gain*a}`. 
+
+The final results could be appreciated in the image below.
+
+<center>
+<img src=img/img_04.png width=100%>
+</center>

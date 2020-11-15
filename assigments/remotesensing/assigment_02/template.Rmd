@@ -1,0 +1,78 @@
+---
+title: "UAV assignment"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+- name: "<b>Code:</b> s1078735"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+
+```
+
+# Question N° 01
+
+**Import the aerial images and align them in order to create a sparse point cloud.**
+
+Photos can be added via  Workflow  > Add photos. Once added all the photos, need to be aligned (Workflow > Align photos, see figure N°01).
+
+The **align photos** process output is a point cloud.
+
+# Question N° 02
+
+**Import the GCPs (.txt-file provided) and distribute them according to the GCP-overview. The detailed views of every GCP will help you to find the correct positions (Note: After the GCPs have been assigned to the respective marks, the sparse point cloud must be updated by clicking on "optimize camera"!).**
+
+Once the images are aligned it is necessary to import the GCP points by **import reference** and change the parameters.
+
+
+The GCP are used to estimate and improve the global accuracy of the images. The process consist in filter photos with a marker and right-clicking on each marker.
+
+
+The error after placing the GCPs is 0.05m.
+
+# Question N° 03
+
+**Generate a dense point cloud from your correctly referenced data set**
+
+A dense point cloud is a collection of point positioned which permits us generate 3D visualization. To generate a dense point cloud in Agisoft you need to go to: 
+**Workflow > Build dense cloud**.
+
+# Question N° 04
+
+**Generate both DEM and Orthmosaic and to export them in GeoTIFF format. Visualize the dataset in a GIS environment and draw conclusions about their positional accuracy (e.g. by comparing it with a base map).**
+
+Digital Elevation Model is raster object which represent elevation data. To create a Digital Elevation Model go to **Workflow > Build DEM**.
+
+A Orthmosaic is a mosaic of orthophotos go to **Workflow > Build Orthomosaic** 
+
+
+If me compare our results with a basemap we notices that 
+
+
+
+

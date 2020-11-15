@@ -77,7 +77,7 @@ map_container_distance <- function(dirfile) {
     '['(4:6, ) %>% 
     '['(c("Total_Kilometers", "Total_Minutes", "RouteName"))
   water_container_lines$pop_message <- sprintf(
-    "<strong>%s</strong></br><strong>Distance: </strong>%s km<sup>2</sup></br><strong>Time: </strong>%s",
+    "<strong>%s</strong></br><strong>Distance: </strong>%s km<sup>2</sup></br><strong>Approximate time: </strong>%s min.",
     water_container_lines$RouteName,
     round(water_container_lines$Total_Kilometers, 2),
     round(water_container_lines$Total_Minutes, 2)
@@ -201,9 +201,23 @@ map_02 <- function(dirfile_ojab,
     setView(13.03661, 47.81069, 17) %>% 
     addProviderTiles("Esri.WorldImagery", group = "ESRI basemap") %>%
     addProviderTiles(providers$CartoDB.Voyager, group = "Carto basemap") %>%
+    addPolylines(data = lines_container,
+                 color = "purple",
+                 weight = 6,
+                 opacity = 1,
+                 fillOpacity = 0.1,
+                 group = "Walk time/walk distance", 
+                 popup = ~pop_message,
+                 dashArray = "2",
+                 highlight = highlightOptions(
+                   weight = 7,
+                   color = "black",
+                   fillOpacity = 0.7,
+                   bringToFront = TRUE
+                 )) %>% 
     addCircleMarkers(lng = ~x, 
                      lat = ~y,
-                     radius = 10,
+                     radius = 15,
                      weight = 3,
                      color = "black",
                      opacity = 1,
@@ -213,7 +227,7 @@ map_02 <- function(dirfile_ojab,
     addCircleMarkers(data = map_water_container(dirfile_walk_distance),
                      lng = ~X, 
                      lat = ~Y,
-                     radius = 1,
+                     radius = 1.5,
                      color = "blue",
                      opacity = 1,
                      fillOpacity = 0.1,
@@ -224,20 +238,10 @@ map_02 <- function(dirfile_ojab,
                lat = ~Y,
                group = "OJAB",
                popup = ~pop_message) %>% 
-    addPolylines(data = lines_container,
-                 color = "purple",
-                 weight = 2.5,
-                 opacity = 1,
-                 fillOpacity = 0.1,
-                 group = "Walk time/walk distance", 
-                 popup = ~pop_message,
-                 dashArray = "2",
-                 highlight = highlightOptions(
-                   weight = 7,
-                   color = "purple",
-                   fillOpacity = 0.7,
-                   bringToFront = TRUE
-                 ))
+  addLayersControl(
+    baseGroups = c("ESRI basemap", "Carto basemap"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
 }
 
 map_walk4 <- function() {
@@ -270,7 +274,6 @@ map_walk10 <- function() {
   walk10
 }
 
-
 map_03 <- function() {
   kinder <- read_sf("data/kindergarden.shp.shp", quiet = TRUE) %>% 
     cbind(st_coordinates(.$geometry)) %>% 
@@ -295,28 +298,28 @@ map_03 <- function() {
     addProviderTiles(providers$CartoDB.Voyager, group = "Carto basemap") %>%
     addPolygons(data = map_walk10_obj,
                 color = "black",
-                fillColor = "#0000ff",
+                fillColor = "red",
                 weight = 0.5,
                 opacity = 1,
-                fillOpacity = 0.65,
+                fillOpacity = 1,
                 group = "Walk time/walk distance", 
                 popup = ~pop_message,
                 dashArray = "2") %>%
   addPolygons(data = map_walk8_obj, 
               color = "black",
-              fillColor = "#5252ff",
+              fillColor = "green",
               weight = 0.5,
               opacity = 1,
-              fillOpacity = 0.65,
+              fillOpacity = 1,
               group = "Walk time/walk distance", 
               popup = ~pop_message,
               dashArray = "2")  %>%
     addPolygons(data = map_walk4_obj, 
                 color = "black",
-                fillColor = "#9191ff",
+                fillColor = "yellow",
                 weight = 0.5,
                 opacity = 1,
-                fillOpacity = 0.65,
+                fillOpacity = 1,
                 group = "Walk time/walk distance", 
                 popup = ~pop_message,
                 dashArray = "2"
@@ -335,4 +338,97 @@ map_03 <- function() {
 
 # sdas <- read_sf("data/kindergarden.shp.shp")
 # mapview(sdas, mp3)
+
+wranglig_route_data <- function() {
+  truck_route <- read_sf("data/03_results2.geojson") 
+  truck_route_points <- truck_route[st_geometry_type(truck_route$geometry) == "POINT",]
+  truck_route_line <- truck_route[st_geometry_type(truck_route$geometry) == "MULTILINESTRING",]
+  
+  truck_route_points_f <- truck_route_points["geometry"]
+  truck_route_lines_f <- truck_route_line["geometry"]
+  
+  truck_route_points_f$routes <- sprintf("Route %s", 
+                                         gsub(
+                                           pattern = "waste treatment plant - Route", 
+                                           replacement = "", 
+                                           x = truck_route_points$RouteName))
+  truck_route_points_f$from_prev_travel_time <- truck_route_points$FromPrevTravelTime
+  truck_route_points_f$from_prev_distance <- truck_route_points$FromPrevDistance
+  truck_route_points_f$message <- sprintf(
+    "<center><strong>%s</strong></center><br/><strong>From previous travel time:</strong>%s min<br/><strong>From previous distance: </strong>%s",
+    truck_route_points_f$routes, 
+    round(truck_route_points_f$from_prev_travel_time, 3), 
+    round(truck_route_points_f$from_prev_distance, 3)
+  )
+  truck_route_lines_f$routes <- sprintf("Route %s",
+                                        gsub(
+                                          pattern = "waste treatment plant - Route", 
+                                          replacement = "", 
+                                          x = truck_route_line$RouteName))
+  truck_route_lines_f$total_travel_time <- truck_route_line$TotalTravelTime
+  truck_route_lines_f$total_miles <- truck_route_line$Total_Miles
+  truck_route_lines_f$message <- sprintf(
+    "<center><strong>%s</strong></center><br/><strong>Total travel time:</strong>%s min<br/><strong>Total miles: </strong>%s",
+    truck_route_lines_f$routes, 
+    round(truck_route_lines_f$total_travel_time), 
+    round(truck_route_lines_f$total_miles)
+  )
+  
+  #truck_route_lines_f <- st_drop_geometry(truck_route_lines_f)
+  #truck_route_points_f <- st_drop_geometry(truck_route_points_f)
+  
+  truck_route_points_f <- truck_route_points_f %>% 
+    cbind(st_coordinates(.$geometry))
+  
+  ## ggobject
+  truck_route_points_f_ngeom <- st_drop_geometry(truck_route_points_f)
+  gg01 <- ggplot(truck_route_points_f_ngeom) +
+    geom_boxplot(aes(x = routes,
+                     y = from_prev_travel_time, 
+                     color = from_prev_travel_time)) +
+    theme(legend.position="none") +
+    ylab("Travel time") + xlab("") +
+    theme_classic()
+  list(point = truck_route_points_f, lines = truck_route_lines_f, ggviz = gg01)
+}
+
+
+map_04 <- function(dirfile_ojab,
+                   dirfile_walk_distance) {
+  point_container <- wranglig_route_data()$point
+  lines_container <- wranglig_route_data()$lines
+  rep_p <- table(point_container$routes)
+  lines_container$color <- c("#ff0400","#ffa352","#0d83ff")
+  point_container$color <- c(rep("#ff0400", rep_p[1]),
+                             rep("#ffa352", rep_p[2]), 
+                             rep("#0d83ff", rep_p[3]))
+  point_container %>% 
+    leaflet() %>% 
+    setView(13.03661, 47.81069, 13) %>% 
+    addProviderTiles(providers$CartoDB.Positron, group = "Carto basemap") %>%
+    addProviderTiles("Esri.WorldImagery", group = "ESRI basemap") %>%
+    addPolylines(data = lines_container,
+                 color = ~color,
+                 weight = 3,
+                 opacity = 1,
+                 fillOpacity = 0.1,
+                 group = "Walk time/walk distance", 
+                 popup = ~message,
+                 dashArray = "2") %>% 
+    addCircleMarkers(lng = ~X, 
+                     lat = ~Y,
+                     radius = 5,
+                     weight = 2,
+                     color = "black",
+                     fillColor = ~color,
+                     opacity = 1,
+                     fillOpacity = 1,
+                     group = "OJAB",
+                     popup = ~message) %>% 
+    addLayersControl(
+      baseGroups = c("Carto basemap", "ESRI basemap"),
+      options = layersControlOptions(collapsed = FALSE)
+    )
+}
+
 

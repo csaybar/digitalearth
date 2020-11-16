@@ -64,9 +64,12 @@ map_04()
 
 <div class="floro">
 Using three trucks, 3 routes were generated:
-  - Route # 1 (network): With a total distance of 36 miles and 122 minutes of total travel.
-  - Route # 2 (orange): With a total distance of 32 miles and 111 minutes of total travel.
-  - Route # 3 (blue): With a total distance of 32 miles and 103 minutes of total travel.
+
+  - **Route # 1 (network):** With a total distance of 36 miles and 122 minutes of total travel.
+  
+  - **Route # 2 (orange):** With a total distance of 32 miles and 111 minutes of total travel.
+  
+  - **Route # 3 (blue):** With a total distance of 32 miles and 103 minutes of total travel.
 </div>
 
 ### Optimizing waste glass collection in Salzburg - II. {data-commentary-width=400}
@@ -80,9 +83,12 @@ ggplotly(ggviz)
 
 <div class="floro">
 Using three trucks, 3 routes were generated:
-  - Route # 1 (network): With a total distance of 36 miles and 122 minutes of total travel.
-  - Route # 2 (orange): With a total distance of 32 miles and 111 minutes of total travel.
-  - Route # 3 (blue): With a total distance of 32 miles and 103 minutes of total travel.
+
+  - **Route # 1 (network):** With a total distance of 36 miles and 122 minutes of total travel.
+  
+  - **Route # 2 (orange):** With a total distance of 32 miles and 111 minutes of total travel.
+  
+  - **Route # 3 (blue):** With a total distance of 32 miles and 103 minutes of total travel.
 
 We can see that the average glass waste collection time varies slightly in each route (approximately 1.8 min for each point). The extreme values presented by this box plot are related to the distance between **Siggerwiesen** and the first collection point.
 </div>

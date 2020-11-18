@@ -1,0 +1,248 @@
+---
+title: "Zinc spatial prediction in the Meuse river"
+output:
+  flexdashboard::flex_dashboard:
+    storyboard: yes
+    self_contained: false
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+library(sp)
+library(sf)
+library(gstat)
+library(raster)
+library(leaflet)
+library(ggplot2)
+library(rasterVis)
+library(plotly)
+library(mapview)
+source("functions.R")
+```
+
+### Formal introduction to the **meuse dataset** {data-commentary-width=650}
+
+```{r}
+meuse <- create_meuse() 
+m1 <- mapview(
+  x = meuse, 
+  zcol = "dist",
+  legend = TRUE,
+  cex=10
+)
+m1@map
+```
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+**Stein, Belgium** is agriculture village which have a lot of problem with soil pollution. The authorities worried about the situation created the **meuse** dataset that gives information about the top soil heavy metal concentrations (ppm), along with a number of soil and landscape variables. Heavy metal concentrations are bulk sampled from an area of approximately 15 m x 15 m ([Pebesma, 2020](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)).
+
+**This dataset contains the following columns:**
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax"><span style="font-weight:bold">x:</span></th>
+    <th class="tg-0lax"><span style="font-weight:400;font-style:normal">x-coordinate (m)</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"><span style="font-weight:bold">y:</span></td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">y-coordinate (m)</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><span style="font-weight:bold;font-style:normal">cadmium:</span></td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">topsoil cadmium concentration, ppm</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><span style="font-weight:bold">copper:</span></td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">topsoil copper concentration, ppm.</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><span style="font-weight:bold;font-style:normal">lead:</span></td>
+    <td class="tg-0lax">topsoil lead concentration, ppm.</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><span style="font-weight:bold">zinc:</span></td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">topsoil zinc concentration, ppm.</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">elev:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">relative elevation</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">dist:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">distance to river Meuse; obtained from the nearest cell in</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig"><span style="font-style:normal">om:</span></td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">organic matter, as percentage</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">ffreq:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">flooding frequency class</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">soil:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">soil type</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">landuse:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">landuse class</span></td>
+  </tr>
+  <tr>
+    <td class="tg-1wig">dist.m:</td>
+    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">distance to river Meuse (metres), as obtained during the field survey</span></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+### Interpolation of **zinc values** I {data-commentary-width=400}
+
+```{r}
+results_varg <- fit_variog()
+plot(results_varg$exp, results_varg$theo)
+```
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+
+For interpolate zinc values we use **ordinary kriging**. It is a gaussian method that gives us the [best linear unbiased prediction](https://en.wikipedia.org/wiki/Best_linear_unbiased_prediction) for all predictions based on covariance/variogram estimates. 
+
+To use **kriging** two hypothesis must be fulfilled:
+
+1) The first moment of the sample is stationary.
+
+2) The correlation between random variables solely depends on the spatial distance, and is independent of their location.
+
+After estimate the mean of different **bootstrap samples** (it is not shown here) we notice that all random variables have the same mean (first hypothesis). The no trend in the **spatial autocorrelation** (second hypothesis) of zinc values was measure using a empirical/experimental variogram that was fitted to a spherical variogram model (see left image).
+</div>
+
+### Interpolation of **zinc values** II {data-commentary-width=400}
+
+```{r}
+zinc_map <- suppressMessages(
+  suppressWarnings(
+    zinc_kriging()
+  )
+)
+na.color <- "#FFFFFF00"
+m2 <- suppressWarnings(
+  mapview(
+    x = zinc_map[[1]],
+    alpha.regions = 1,
+    legend = TRUE, 
+    na.color = na.color, 
+    layer.name = "prediction"
+  )
+)
+
+m3 <- suppressWarnings(
+  mapview(
+    x = zinc_map[[2]],
+    alpha.regions = 1,
+    legend = TRUE, 
+    na.color = na.color, 
+    layer.name = "variance"
+  )
+)
+
+m4 <- m3 + m2
+m4@map
+```
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+Using the spherical variogram model, the kriging weights were calculated by deriving minimum variance and substituting the semivariogram function into the kriging equation. The **left map** shows us the kriging prediction results and the local variance error for zinc values.  
+</div>
+
+### **Out-of-sample testing** as a technique to measure the models' accuracy {data-commentary-width=400}
+ 
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/K-fold_cross_validation_EN.svg">
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+**out-of-sample testing** or **cross-validation** is a statistical method that could be used to estimate the local and global error of spatial models.
+
+For this example we use **k-fold out-of-sample testing** (see left image). In this algorithm, The original sample is randomly partitioned into k equal sized subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining k − 1 subsamples are used as training data. The cross-validation process is then repeated k times, with each of the k subsamples used exactly once as the validation data. The k results can then be averaged to produce a single estimation.
+
+The advantage of this method over repeated random sub-sampling (see right image) is that all observations are used for both training and validation, and each observation is used for validation exactly once. **5-fold cross-validation** is used for zinc spatial prediction.
+</div>
+
+### **K-fold out-of-sample** for testing zinc spatial prediction {data-commentary-width=400}
+ 
+```{r}
+kriging_cv <- zinc_kriging_cv()
+valuesx <- abs(kriging_cv$residual)
+m5 <- suppressWarnings(
+  mapview(
+    x = kriging_cv["residual"],
+    cex = valuesx*10,
+    alpha.regions = 1,
+    legend = TRUE, 
+    na.color = na.color, 
+    layer.name = "variance"
+  )
+)
+m5@map
+```
+
+
+------------------------------------------------------------------------
+
+<div class="floro">
+It can be seen that areas near the river present **positive large residuals**, while values in the continental area, at least most of it, present **negative** and close to zero values.
+
+These results show us that in future fieldworks, it would be much better to collect more data from areas near the river rather than in inner areas due that it would generate a lower global mean error in final spatial prediction estimations.
+</div>
+
+### How much influence the **number of points** in the interpolation? {data-commentary-width=400}
+ 
+```{r}
+npoints_importance <- zinc_kriging_cv_npoints()
+gg1 <- ggplot(npoints_importance) +
+  geom_line(aes(x=npoints, y=error), cex=2)+
+  geom_point(aes(x=npoints, y=error), cex=4.5)+
+  xlab("Number of points") +
+  ylab("RMSE") +
+  theme_bw()
+ggplotly(gg1)
+```
+
+
+-------------------------------------------------------------------------
+<div class="floro">
+If we random sampling with no replacement the **meuse dataset** and also considering different samples groups **(25, 50, 75, 100, 122, and 155)**. We could indirectly measure (see left image) the local/spatial variance of our experiment. The smaller the spatial variance, the smaller **RMSE** regardless of the number of points.
+
+We use **bootstrap aggregating** (running 100 times the same experiment) to improve the stability and accuracy of our results.
+</div>
+
+### How much influence the adjust of the variogram in the interpolation? {data-commentary-width=400}
+ 
+```{r}
+levelplot(zinc_dranges(), par.settings = viridisTheme)
+```
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+One of the most important points to create a good spatial prediction model is estimate the **spatial dependence** rule. In **IDW** the power value is the most important parameter which need to be fixed. On the contrary in **ordinary kriging**, we need to adjust the variogram and to be more especific the range which is the maximum distance up to which the spatial autocorrelation could be found.
+
+In this experiment we run **kriging ordinary**, with different range values (200, 400, 600, 800, 1000 and 1200). Our results show us that low range values generate bulls eye effect on results while large range values generate smoothed regions. 
+</div>

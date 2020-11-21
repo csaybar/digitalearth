@@ -11,12 +11,12 @@ output:
 library(sp)
 library(sf)
 library(gstat)
+library(plotly)
 library(raster)
 library(leaflet)
 library(ggplot2)
-library(rasterVis)
-library(plotly)
 library(mapview)
+library(rasterVis)
 source("functions.R")
 ```
 
@@ -36,7 +36,7 @@ m1@map
 -------------------------------------------------------------------------
 
 <div class="floro">
-**Stein, Belgium** is agriculture village which have a lot of problem with soil pollution. The authorities worried about the situation created the **meuse** dataset that gives information about the top soil heavy metal concentrations (ppm), along with a number of soil and landscape variables. Heavy metal concentrations are bulk sampled from an area of approximately 15 m x 15 m ([Pebesma, 2020](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)).
+**Stein, Belgium** is an agriculture village which, have many problems with soil pollution. Due to the situation, the authorities created the **Meuse** dataset that gives information about the top soil heavy metal concentrations (ppm), along with a number of soil and landscape variables. Heavy metal concentrations are bulk sampled from an area of approximately 15 m x 15 m ([Pebesma, 2020](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)).
 
 **This dataset contains the following columns:**
 
@@ -94,14 +94,6 @@ m1@map
     <td class="tg-0lax"><span style="font-weight:400;font-style:normal">flooding frequency class</span></td>
   </tr>
   <tr>
-    <td class="tg-1wig">soil:</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">soil type</span></td>
-  </tr>
-  <tr>
-    <td class="tg-1wig">landuse:</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal">landuse class</span></td>
-  </tr>
-  <tr>
     <td class="tg-1wig">dist.m:</td>
     <td class="tg-0lax"><span style="font-weight:400;font-style:normal">distance to river Meuse (metres), as obtained during the field survey</span></td>
   </tr>
@@ -121,15 +113,16 @@ plot(results_varg$exp, results_varg$theo)
 
 <div class="floro">
 
-For interpolate zinc values we use **ordinary kriging**. It is a gaussian method that gives us the [best linear unbiased prediction](https://en.wikipedia.org/wiki/Best_linear_unbiased_prediction) for all predictions based on covariance/variogram estimates. 
+For interpolate zinc values we use **ordinary kriging** method. This is a gaussian
+approach provides **always** the [best linear unbiased prediction](https://en.wikipedia.org/wiki/Best_linear_unbiased_prediction) for all predictions based on covariance/variogram estimates. 
 
 To use **kriging** two hypothesis must be fulfilled:
 
 1) The first moment of the sample is stationary.
 
-2) The correlation between random variables solely depends on the spatial distance, and is independent of their location.
+2) The correlation between random variables solely depends on the spatial distance and is independent of their location.
 
-After estimate the mean of different **bootstrap samples** (it is not shown here) we notice that all random variables have the same mean (first hypothesis). The no trend in the **spatial autocorrelation** (second hypothesis) of zinc values was measure using a empirical/experimental variogram that was fitted to a spherical variogram model (see left image).
+After estimate the mean of different **bootstrap samples** (it is not shown here), we notice that all random variables have the same mean (first hypothesis). The no trend in the **spatial autocorrelation** (second hypothesis) of zinc values was measure using an empirical/experimental variogram that was fitted to a spherical variogram model (see left image).
 </div>
 
 ### Interpolation of **zinc values** II {data-commentary-width=400}
@@ -182,7 +175,7 @@ Using the spherical variogram model, the kriging weights were calculated by deri
 
 For this example we use **k-fold out-of-sample testing** (see left image). In this algorithm, The original sample is randomly partitioned into k equal sized subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining k − 1 subsamples are used as training data. The cross-validation process is then repeated k times, with each of the k subsamples used exactly once as the validation data. The k results can then be averaged to produce a single estimation.
 
-The advantage of this method over repeated random sub-sampling (see right image) is that all observations are used for both training and validation, and each observation is used for validation exactly once. **5-fold cross-validation** is used for zinc spatial prediction.
+The advantage of this method over repeated random sub-sampling (see right image) is that all observations are used for both training and validation and each observation is used for validation exactly once. The **5-fold cross-validation** is used for zinc spatial prediction.
 </div>
 
 ### **K-fold out-of-sample** for testing zinc spatial prediction {data-commentary-width=400}
@@ -197,7 +190,7 @@ m5 <- suppressWarnings(
     alpha.regions = 1,
     legend = TRUE, 
     na.color = na.color, 
-    layer.name = "variance"
+    layer.name = "residual"
   )
 )
 m5@map
@@ -209,7 +202,7 @@ m5@map
 <div class="floro">
 It can be seen that areas near the river present **positive large residuals**, while values in the continental area, at least most of it, present **negative** and close to zero values.
 
-These results show us that in future fieldworks, it would be much better to collect more data from areas near the river rather than in inner areas due that it would generate a lower global mean error in final spatial prediction estimations.
+These results show that in future fieldworks, it would be ideal to collect more data from areas **near the river rather than in inner areas**. Therefore, it would generate a lower global mean error in final spatial prediction estimations.
 </div>
 
 ### How much influence the **number of points** in the interpolation? {data-commentary-width=400}
@@ -228,9 +221,9 @@ ggplotly(gg1)
 
 -------------------------------------------------------------------------
 <div class="floro">
-If we random sampling with no replacement the **meuse dataset** and also considering different samples groups **(25, 50, 75, 100, 122, and 155)**. We could indirectly measure (see left image) the local/spatial variance of our experiment. The smaller the spatial variance, the smaller **RMSE** regardless of the number of points.
+If we random sampling with no replacement the **meuse dataset** and also considering different samples groups **(25, 50, 75, 100, 122, and 155)**. We could indirectly measure the local/spatial variance of our experiment. The left image shows the global interpolation error in the y-axis ([RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation)) and different samples in x-axis. 
 
-We use **bootstrap aggregating** (running 100 times the same experiment) to improve the stability and accuracy of our results.
+To improve the stability and accuracy of our results, we use **bootstrap aggregating** (running 100 times the same experiment). The results reveal that the less number of points, the smaller **RMSE**.
 </div>
 
 ### How much influence the adjust of the variogram in the interpolation? {data-commentary-width=400}
@@ -242,7 +235,7 @@ levelplot(zinc_dranges(), par.settings = viridisTheme)
 -------------------------------------------------------------------------
 
 <div class="floro">
-One of the most important points to create a good spatial prediction model is estimate the **spatial dependence** rule. In **IDW** the power value is the most important parameter which need to be fixed. On the contrary in **ordinary kriging**, we need to adjust the variogram and to be more especific the range which is the maximum distance up to which the spatial autocorrelation could be found.
+One of the most important points to create a good spatial prediction model is estimate the **spatial dependence** rule. In Inverse Distance Weighting **(IDW)**, the power value is the most important parameter which have to be addressed. On the contrary in **ordinary kriging**, we need to adjust the variogram and to be more specific the **range**, which is the maximum distance up to which the spatial autocorrelation could be found.
 
-In this experiment we run **kriging ordinary**, with different range values (200, 400, 600, 800, 1000 and 1200). Our results show us that low range values generate bulls eye effect on results while large range values generate smoothed regions. 
+In this experiment we run **kriging ordinary**, with different range values (200, 400, 600, 800, 1000 and 1200). The results illustrates that low range values generate a bull eye effect on the results while larger range values generate smoothed regions.
 </div>

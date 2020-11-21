@@ -10,8 +10,8 @@ con <- RPostgreSQL::dbConnect(
   dbname = "spdb_course",
   host = "localhost", 
   user = "csaybar", 
-  password = "lesly",
-  port = 5432
+  password = "csaybar",
+  port = 5433
 )
 
 # 3. Create the table

@@ -122,7 +122,7 @@ To use **kriging** two hypothesis must be fulfilled:
 
 2) The correlation between random variables solely depends on the spatial distance and is independent of their location.
 
-After estimate the mean of different **bootstrap samples** (it is not shown here), we notice that all random variables have the same mean (first hypothesis). The no trend in the **spatial autocorrelation** (second hypothesis) of zinc values was measure using an empirical/experimental variogram that was fitted to a spherical variogram model (see left image).
+After estimate the mean of different **bootstrap samples** (it is not shown here), we notice that all random variables follow a uniform distribution (first hypothesis). The no trend in the **spatial autocorrelation** (second hypothesis) of zinc values was measure using an empirical/experimental variogram that was fitted to a spherical variogram model (see left image). We notice that the range is stabilized at around 850 meters.
 </div>
 
 ### Interpolation of **zinc values** II {data-commentary-width=400}
@@ -200,9 +200,9 @@ m5@map
 ------------------------------------------------------------------------
 
 <div class="floro">
-It can be seen that areas near the river present **positive large residuals**, while values in the continental area, at least most of it, present **negative** and close to zero values.
+It can be seen that areas near the river present **positive large residuals**, while values in the inner area, at least most of it, present **negative** and close to zero values.
 
-These results show that in future fieldworks, it would be ideal to collect more data from areas **near the river rather than in inner areas**. Therefore, it would generate a lower global mean error in final spatial prediction estimations.
+These results show that in future fieldworks, it would be ideal to collect more data from areas **near the river rather than in inner areas** since it would generate a lower global mean error in the spatial prediction.
 </div>
 
 ### How much influence the **number of points** in the interpolation? {data-commentary-width=400}
@@ -221,9 +221,9 @@ ggplotly(gg1)
 
 -------------------------------------------------------------------------
 <div class="floro">
-If we random sampling with no replacement the **meuse dataset** and also considering different samples groups **(25, 50, 75, 100, 122, and 155)**. We could indirectly measure the local/spatial variance of our experiment. The left image shows the global interpolation error in the y-axis ([RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation)) and different samples in x-axis. 
+If we random sampling with no replacement the **meuse dataset** and also considering different samples groups **(25, 50, 75, 100, 122, and 155)**. We could indirectly measure the global spatial variance of our experiment. The left image shows the global interpolation error in the y-axis ([RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation)) and different samples in x-axis. 
 
-To improve the stability and accuracy of our results, we use **bootstrap aggregating** (running 100 times the same experiment). The results reveal that the less number of points, the smaller **RMSE**.
+To improve the stability and accuracy of our results, we use **bootstrap aggregating** (i.e. running 100 times the same experiment for each random sampling). The results reveal that the less number of points, the higher **RMSE**.
 </div>
 
 ### How much influence the adjust of the variogram in the interpolation? {data-commentary-width=400}
@@ -238,4 +238,25 @@ levelplot(zinc_dranges(), par.settings = viridisTheme)
 One of the most important points to create a good spatial prediction model is estimate the **spatial dependence** rule. In Inverse Distance Weighting **(IDW)**, the power value is the most important parameter which have to be addressed. On the contrary in **ordinary kriging**, we need to adjust the variogram and to be more specific the **range**, which is the maximum distance up to which the spatial autocorrelation could be found.
 
 In this experiment we run **kriging ordinary**, with different range values (200, 400, 600, 800, 1000 and 1200). The results illustrates that low range values generate a bull eye effect on the results while larger range values generate smoothed regions.
+</div>
+
+
+### **Conclusion** {data-commentary-width=400}
+
+```{r}
+m4@map
+```
+
+-------------------------------------------------------------------------
+
+<div class="floro">
+After analyzing the variogram, it can be noticed that zinc values in this 
+agricultural area between the **Meuse River** and the **Stein, Belgium** village
+present a clear **spatial autocorrelation**. In addition, the 
+**5-fold cross-validation** shows us that the global error of the spatial 
+model proposed here ($RMSE_{global}$) was 0.26 and this could exponentially 
+increase if the number of points is reduced. 
+
+These results can help decision-makers to design future fieldworks taking 
+into account the error map (**prior probability**) generated in this report.
 </div>

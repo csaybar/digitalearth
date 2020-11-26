@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Question #1 | Spatial Databases assignment</title>
+  <meta name="description" content="2 Question #1 | Spatial Databases assignment" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Question #1 | Spatial Databases assignment" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Question #1 | Spatial Databases assignment" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="possible-context.html"/>
+<link rel="next" href="question-2.html"/>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="possible-context.html"><a href="possible-context.html"><i class="fa fa-check"></i><b>1</b> Possible context</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="possible-context.html"><a href="possible-context.html#create-and-run-a-container-with-postgis"><i class="fa fa-check"></i><b>1.1</b> Create and run a container with POSTGIS</a></li>
+<li class="chapter" data-level="1.2" data-path="possible-context.html"><a href="possible-context.html#load-all-necessary-r-libraries"><i class="fa fa-check"></i><b>1.2</b> Load all necessary R libraries</a></li>
+<li class="chapter" data-level="1.3" data-path="possible-context.html"><a href="possible-context.html#create-a-connection-to-the-postgres-database"><i class="fa fa-check"></i><b>1.3</b> Create a connection to the Postgres database</a></li>
+<li class="chapter" data-level="1.4" data-path="possible-context.html"><a href="possible-context.html#upload-salzburg-shapefiles-to-the-dataset"><i class="fa fa-check"></i><b>1.4</b> Upload Salzburg shapefiles to the dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="question-1.html"><a href="question-1.html"><i class="fa fa-check"></i><b>2</b> Question #1</a></li>
+<li class="chapter" data-level="3" data-path="question-2.html"><a href="question-2.html"><i class="fa fa-check"></i><b>3</b> Question #2</a></li>
+<li class="chapter" data-level="4" data-path="question-3.html"><a href="question-3.html"><i class="fa fa-check"></i><b>4</b> Question #3</a></li>
+<li class="chapter" data-level="5" data-path="question-4.html"><a href="question-4.html"><i class="fa fa-check"></i><b>5</b> Question #4</a></li>
+<li class="chapter" data-level="6" data-path="question-5.html"><a href="question-5.html"><i class="fa fa-check"></i><b>6</b> Question #5</a></li>
+<li class="chapter" data-level="7" data-path="question-6.html"><a href="question-6.html"><i class="fa fa-check"></i><b>7</b> Question #6</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatial Databases assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="question-1" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Question #1</h1>
+<p><strong>Repeat the query with all buildings, which are of type church and then repeat the query to create a layer, which contains churches and schools.</strong></p>
+<p><strong>Only churches</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="question-1.html#cb6-1" aria-hidden="true" tabindex="-1"></a>query_01_01 <span class="ot">&lt;-</span> <span class="st">&quot;SELECT * FROM salzburg_buildings WHERE type=&#39;church&#39;;&quot;</span></span>
+<span id="cb6-2"><a href="question-1.html#cb6-2" aria-hidden="true" tabindex="-1"></a>slzg_church <span class="ot">&lt;-</span> <span class="fu">st_read</span>(con, <span class="at">query =</span> query_01_01)</span>
+<span id="cb6-3"><a href="question-1.html#cb6-3" aria-hidden="true" tabindex="-1"></a>slzg_church</span></code></pre></div>
+<pre><code>## Simple feature collection with 67 features and 5 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 347522.1 ymin: 5291262 xmax: 357904.1 ymax: 5300425
+## CRS:            NA
+## First 10 features:
+##      osm_id code   fclass                                                  name
+## 1  63940359 1500 building Pfarr- und Dekanatskirche Bergheim zum Heiligen Georg
+## 2  66232058 1500 building                                   Kloster Maria Plain
+## 3  66232062 1500 building                                                  &lt;NA&gt;
+## 4  48625220 1500 building                                        Lehener Kirche
+## 5  65085291 1500 building                                 Herz Jesu Heim Kirche
+## 6  68697476 1500 building                                        Müllner Kirche
+## 7  68697783 1500 building                                                  &lt;NA&gt;
+## 8  68943740 1500 building                                                  &lt;NA&gt;
+## 9  69047466 1500 building                                     St. Johannskirche
+## 10 94402048 1500 building                                          Maria Schutz
+##      type                       geometry
+## 1  church MULTIPOLYGON (((352156.8 53...
+## 2  church MULTIPOLYGON (((353266.6 53...
+## 3  church MULTIPOLYGON (((353309.8 53...
+## 4  church MULTIPOLYGON (((352415.6 52...
+## 5  church MULTIPOLYGON (((352627 5295...
+## 6  church MULTIPOLYGON (((352873.3 52...
+## 7  church MULTIPOLYGON (((352917.6 52...
+## 8  church MULTIPOLYGON (((352844.9 52...
+## 9  church MULTIPOLYGON (((352568.9 52...
+## 10 church MULTIPOLYGON (((352854.6 52...</code></pre>
+<center>
+<img src="img/img_02.png">
+</center>
+<p><strong>Churches and schools</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="question-1.html#cb8-1" aria-hidden="true" tabindex="-1"></a>query_01_02 <span class="ot">&lt;-</span> <span class="st">&quot;SELECT * FROM salzburg_buildings WHERE type=&#39;church&#39; OR type=&#39;school&#39;;&quot;</span></span>
+<span id="cb8-2"><a href="question-1.html#cb8-2" aria-hidden="true" tabindex="-1"></a>slzg_cs <span class="ot">&lt;-</span> <span class="fu">st_read</span>(con, <span class="at">query =</span> query_01_02)</span>
+<span id="cb8-3"><a href="question-1.html#cb8-3" aria-hidden="true" tabindex="-1"></a>slzg_cs</span></code></pre></div>
+<pre><code>## Simple feature collection with 156 features and 5 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 346861.9 ymin: 5291262 xmax: 359575.3 ymax: 5300637
+## CRS:            NA
+## First 10 features:
+##       osm_id code   fclass
+## 1   63940359 1500 building
+## 2   66232058 1500 building
+## 3   66232062 1500 building
+## 4  112738384 1500 building
+## 5  112738399 1500 building
+## 6    2811863 1500 building
+## 7  136900567 1500 building
+## 8  209206098 1500 building
+## 9  209206099 1500 building
+## 10  45082119 1500 building
+##                                                     name   type
+## 1  Pfarr- und Dekanatskirche Bergheim zum Heiligen Georg church
+## 2                                    Kloster Maria Plain church
+## 3                                                   &lt;NA&gt; church
+## 4                             Neue Mittelschule Bergheim school
+## 5                                   Volksschule Bergheim school
+## 6                                                   &lt;NA&gt; school
+## 7                                                   &lt;NA&gt; school
+## 8                                                   &lt;NA&gt; school
+## 9                                                   &lt;NA&gt; school
+## 10                                    Volksschule Taxham school
+##                          geometry
+## 1  MULTIPOLYGON (((352156.8 53...
+## 2  MULTIPOLYGON (((353266.6 53...
+## 3  MULTIPOLYGON (((353309.8 53...
+## 4  MULTIPOLYGON (((351976.8 53...
+## 5  MULTIPOLYGON (((352011.5 53...
+## 6  MULTIPOLYGON (((356584.7 52...
+## 7  MULTIPOLYGON (((356557.6 52...
+## 8  MULTIPOLYGON (((356658.8 52...
+## 9  MULTIPOLYGON (((356581.4 52...
+## 10 MULTIPOLYGON (((350592.9 52...</code></pre>
+<center>
+<img src="img/img_03.png">
+</center>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="possible-context.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="question-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+---
+title: "Digital Earth: Big Earth Data Concept - assignment III"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho (s1078735)"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Question N° 01
+
+**Create an interactive temperature time series plot for three different cities**
+
+
+```{r warning=FALSE, message=FALSE}
+# 1. Load libraries
+library(plotly)
+library(tidyr)
+library(rgee)
+library(sf)
+
+# 2. Initialize Earth Engine
+ee_Initialize(quiet = TRUE)
+
+
+# 3. Create points in R (cities) and convert it to a FeatureCollection
+huayllay <- c(-76.366178, -11.007252) %>% ee$Geometry$Point()
+tarma  <- c(-75.684271, -11.422149) %>% ee$Geometry$Point()
+lamerced <- c(-75.332555, -11.063864) %>% ee$Geometry$Point()
+fc_points <- ee$FeatureCollection(
+  list(
+    ee$Feature(huayllay, list(name=huayllay)),
+    ee$Feature(tarma, list(name=tarma)),
+    ee$Feature(lamerced, list(name=lamerced))
+  )
+)
+
+# 4. Load Landsat 8 collection
+temps2013 <- ee$ImageCollection('LANDSAT/LC08/C01/T1_32DAY_TOA') %>% 
+  ee$ImageCollection$filterDate('2013-12-25', '2017-12-25') %>% 
+  ee$ImageCollection$filterBounds(fc_points) %>% 
+  ee$ImageCollection$select('B11')
+
+# 5. Extract the values
+time_serie <- ee_extract(x = temps2013$toBands(), y =  fc_points, scale = 100)
+
+# 6. Convert a data.frame into tidy data.frame
+time_serie_nosf <- time_serie %>% t %>% data.frame()
+dates <- as.Date(gsub("X|_B11", "", rownames(time_serie_nosf)), "%Y%m%d")
+colnames(time_serie_nosf) <- c("huayllay", "tarma", "lamerced")
+rownames(time_serie_nosf) <- NULL
+time_serie_nosf$Date <- dates
+cities_tidy <- time_serie_nosf %>%
+  pivot_longer(!Date, 
+               names_to = "city",
+               values_to = "temp") 
+
+# 7. Create a beautiful plot with ggplot2
+gg1 <- ggplot(cities_tidy) +
+  geom_line(aes(Date, temp, group=city, color=city)) +
+  ylab("Temperature (°K)") + xlab("") + 
+  theme_bw() + theme(legend.position="none")
+
+# 8. Display final results interactively
+ggplotly(gg1)
+```
+
+**Display a interactive map with leaflet**
+
+```{r warning=FALSE, message=FALSE}
+local_sf <- ee_as_sf(fc_points)["name"]
+m1 <- mapview::mapview(local_sf)
+m1@map
+```
+

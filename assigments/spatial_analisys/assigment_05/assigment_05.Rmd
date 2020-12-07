@@ -1,0 +1,112 @@
+---
+title: "How close are kindergardens and water containers to ÖJAB-Haus Salzburg?"
+output:
+  flexdashboard::flex_dashboard:
+    storyboard: yes
+    social: menu
+    source: embed
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+library(googleCloudStorageR)
+library(reticulate)
+library(leaflet)
+library(leafem)
+library(raster)
+library(stars)
+library(sf)
+source("functions.R")
+```
+
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+mapview::mapviewOptions(fgb = FALSE)
+question_01_01()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+question_01_02()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+question_02_01()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+question_03_01()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+question_03_02()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>
+
+
+### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+```{r}
+question_03_03()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+
+On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+</div>

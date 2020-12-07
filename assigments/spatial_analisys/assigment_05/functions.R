@@ -104,16 +104,40 @@ question_01_02 <- function() {
   hist(slope, main="", xlab="Values")
 }
 
+question_02_00 <- function() {
+  codes <- "2  8272285 42 0 0 0 0"
+  results_sf <- create_watershed_and_rivers(codes = codes)
+  basin <- results_sf$basin
+  basinX <- basin %>% st_cast("LINESTRING") %>% '['("geometry")
+  pal <- colorRampPalette(c("red", "white", "blue"))
+  no_curvature <- raster("data/profile_curvature.tif")*1
+  no_curvature <- scale(no_curvature)
+  relative_slope_position <- mask(no_curvature, as(basin, "Spatial"))
+  m1 <- mapview::mapview(
+    relative_slope_position, 
+    na.color = "#FFFFFF00", 
+    col.regions = pal(100),
+    at = seq(-4,4,0.5),
+    layer.name="profile curvature")
+  m2 <- mapview::mapview(basinX$geometry, color = "black", lwd = 3.5)
+  (m2 + m1)
+}
+
 question_02_01 <- function() {
   codes <- "2  8272285 42 0 0 0 0"
   results_sf <- create_watershed_and_rivers(codes = codes)
   basin <- results_sf$basin
   basinX <- basin %>% st_cast("LINESTRING") %>% '['("geometry")
   pal <- colorRampPalette(c("red", "white", "blue"))
-  no_curvature <- raster("data/cesar_relative_slope_position.tif")
-  no_curvature[no_curvature <= 0] = NA
+  
+  dem_raster <- raster("data/dem.tif")
+  dem_raster[dem_raster <= 0] = NA
+  no_curvature <- terrain(dem_raster, "tpi", unit = "degrees")
+  no_curvature[is.nan(no_curvature)] = NA
   relative_slope_position <- mask(no_curvature, as(basin, "Spatial"))
-  m1 <- mapview::mapview(relative_slope_position, na.color = "#FFFFFF00", col.regions = pal(100))
+  m1 <- mapview::mapview(relative_slope_position, na.color = "#FFFFFF00",
+                         layer.name="TPI",
+                         col.regions = pal(100))
   m2 <- mapview::mapview(basinX$geometry, color = "black", lwd = 3.5)
   (m2 + m1)
 }
@@ -130,6 +154,7 @@ question_03_01 <- function() {
   m1 <- mapview::mapview(dem_areas_slope, zcol = "slope", layer.name = "Slope - DEM each 200 meters.")
   m1
 }
+
 
 question_03_02 <- function() {
   dem_raster <- raster("data/dem.tif")
@@ -168,3 +193,22 @@ question_03_03 <- function() {
   m3 + m5  
 }
 
+
+question_03_04 <- function() {
+  library(ggplot2)
+  library(plotly)
+  
+  dem_raster <- raster("data/dem.tif")
+  dem_raster[dem_raster <= 0] = NA
+  
+  slope <- terrain(dem_raster, unit = "degrees")
+  slope[is.nan(slope)] = NA
+  
+  slope30 <- data.frame(values = na.omit(raster::getValues(slope)))
+  slope120 <- data.frame(values = na.omit(raster::getValues(raster::aggregate(slope, fact=4))))
+  slope30$class <- 'slope 30'
+  slope120$class <- 'slope 120'
+  final_db <- rbind(slope30, slope120)
+  m1 <- ggplot(final_db, aes(values, fill = class)) + geom_density(alpha = 0.2)
+  ggplotly(m1)
+}

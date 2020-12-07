@@ -1,5 +1,5 @@
 ---
-title: "How close are kindergardens and water containers to ÖJAB-Haus Salzburg?"
+title: "Getting terrain information in Salzburg Catchments"
 output:
   flexdashboard::flex_dashboard:
     storyboard: yes
@@ -19,9 +19,7 @@ library(sf)
 source("functions.R")
 ```
 
-
-
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+### **Area of Interest (AOI)** {data-commentary-width=400}
 
 ```{r}
 mapview::mapviewOptions(fgb = FALSE)
@@ -31,13 +29,15 @@ question_01_01()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
 
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+Our area of interest is located in the southern part of the state of Salzburg close to Schmitten city. The Digital Elevation Models (DEM) values were obtained from the product [ALOS World 3D (AW3D30)](http://www.eorc.jaxa.jp/ALOS/en/aw3d30/aw3d30v11_format_e.pdf). In the map at the right, we display the slope.
+
+**Mouse over the pixels to obtain the real value.**
+
 </div>
 
 
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+### **Slope distribution** {data-commentary-width=400}
 
 ```{r}
 question_01_02()
@@ -46,13 +46,31 @@ question_01_02()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+Our area of interest is located in southern part of the state of Salzburg close to the Schmitten city. The Digital Elevation Models (DEM) values where obtained from the product [ALOS World 3D (AW3D30)](http://www.eorc.jaxa.jp/ALOS/en/aw3d30/aw3d30v11_format_e.pdf). In the map at the right, 
+we display the slope.
 
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+
+Considering the slope classification of [V. Zhuchkova and E. Rakovskaya, 2017](https://www.researchgate.net/figure/Classification-of-slope-by-V-Zhuchkova-and-E-Rakovskaya_tbl1_322622715). On average, this catchment could be classified as **very steep**, presenting the lowest values near to the main river and the highest ones close to the drainage divide.
+
+</div>
+
+### **How to estimate the curvature? - I** {data-commentary-width=400}
+
+```{r}
+question_02_00()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+In simple words, we can define the **curvature** as the second derivative of a surface, or the slope of the slope. In surface water hydrology, the concept of curvature plays an important role to understand where the water drains off. 
+
+A negative value indicates that the surface is upwardly convex at that cell, and flow will be decelerated. A positive profile indicates that the surface is upwardly concave at that cell, and the flow will be accelerated. A value of zero indicates that the surface is linear (See [curvature function ArcGIS](https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/curvature-function.htm)).
 </div>
 
 
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+### **How to estimate the curvature? - II** {data-commentary-width=400}
 
 ```{r}
 question_02_01()
@@ -61,13 +79,13 @@ question_02_01()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
-
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+**However**, the curvature is not the only model that explains deformations. Other models like the TPI (Topographic Position Index) given also information about the convex or concave of the terrain. In a TPI model the negative values, represent valleys, canyon, and bottoms, and the positive values
+ridges and hilltops. To estimate the TPI we need to apply a convolution operator and estimate the difference between the value of a cell and the mean value of its 8 surrounding cells. 
 </div>
 
 
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+
+### **Slope according to the altitute - I** {data-commentary-width=400}
 
 ```{r}
 question_03_01()
@@ -76,13 +94,11 @@ question_03_01()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
-
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+For analyzing the local behavior of the slope. The entire catchment was divided into smaller units according to 200m stripes of the elevation.
 </div>
 
 
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+### **Slope according to the altitute - II** {data-commentary-width=400}
 
 ```{r}
 question_03_02()
@@ -91,13 +107,13 @@ question_03_02()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
+For analyzing the local behavior of the slope. The entire catchment was divided into smaller units according to 200m stripes of the elevation.
 
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+The results show that the values of the slope are linearly correlated with changes in the elevation.
 </div>
 
 
-### How far is **KG Alpensiedlung** from **ÖJAB-Haus**? {data-commentary-width=400}
+### **Cellsize importance - I** {data-commentary-width=400}
 
 ```{r}
 question_03_03()
@@ -106,7 +122,32 @@ question_03_03()
 ------------------------------------------------------------------------
 
 <div class="floro">
-**KG Alpensiedlung** is one of the most modern and, therefore, most popular kindergartens in the southern part of Salzburg. If we consider **ÖJAB-Haus** as our starting point, the minimum walking distance to **KG Alpensiedlung** (line blue) is about **5.21 km**, being necessary more than one hour to reach our destination. 
-
-On the other hand, if we consider a car as a means of transport we can find two potential roads. The first one (black dotted line) reaches **KG Alpensiedlung** after 11.31 minutes (6.12 km), while the second one (red line) reaches it in 11.37 minutes (5.72 km).
+This example shows how different is the spatial distribution of slope values if is used a digital elevation model of 120 m instead of  30 m of spatial resolution. 
 </div>
+
+
+### **Cellsize importance - II** {data-commentary-width=400}
+
+```{r}
+question_03_04()
+```
+
+------------------------------------------------------------------------
+
+<div class="floro">
+This example shows how different is the spatial distribution of slope values if is used a digital elevation model of 120 m instead of  30 m of spatial resolution. 
+
+As it can notice, a larger cell size generates values closer to the mean.
+</div>
+
+
+### **Conclusion** {data-commentary-width=400}
+
+Terrain analysis is the basis of several earth observation projects. **The digital terrain models (DTM)** derived from DEM, show us that in this specific catchment:
+
+  - The slope change according to the altitude.
+
+  - There is more common to find negative values of curvature in the valleys (low altitude areas).
+
+  - And finally, the cell size (from 30 to 120 meters) changes sightly the first and second moment of our slope statistical distribution.
+

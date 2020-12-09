@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Preprocessing | Geovisualization and Advanced Cartography</title>
+  <meta name="description" content="2 Preprocessing | Geovisualization and Advanced Cartography" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Preprocessing | Geovisualization and Advanced Cartography" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Preprocessing | Geovisualization and Advanced Cartography" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="assignment-2-data-exploration-and-geovisualization.html"/>
+<link rel="next" href="question-1-what-is-the-most-recurrent-trip.html"/>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="assignment-2-data-exploration-and-geovisualization.html"><a href="assignment-2-data-exploration-and-geovisualization.html"><i class="fa fa-check"></i><b>1</b> Assignment 2: Data Exploration and Geovisualization</a></li>
+<li class="chapter" data-level="2" data-path="preprocessing.html"><a href="preprocessing.html"><i class="fa fa-check"></i><b>2</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="preprocessing.html"><a href="preprocessing.html#what-is-tableau-desktop"><i class="fa fa-check"></i><b>2.1</b> What is Tableau Desktop?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="question-1-what-is-the-most-recurrent-trip.html"><a href="question-1-what-is-the-most-recurrent-trip.html"><i class="fa fa-check"></i><b>3</b> Question #1: What is the most recurrent trip?</a></li>
+<li class="chapter" data-level="4" data-path="question-2-how-much-has-bluebikes-grown.html"><a href="question-2-how-much-has-bluebikes-grown.html"><i class="fa fa-check"></i><b>4</b> Question #2: How much has <strong>BLUEbikes</strong> grown?</a></li>
+<li class="chapter" data-level="5" data-path="question-3-what-are-the-most-popular-destinations.html"><a href="question-3-what-are-the-most-popular-destinations.html"><i class="fa fa-check"></i><b>5</b> Question #3: What are the most popular destinations?</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Geovisualization and Advanced Cartography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preprocessing" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Preprocessing</h1>
+<div id="what-is-tableau-desktop" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> What is Tableau Desktop?</h2>
+<p>Tableau Desktop is the primary product of Tableau. This tool permits to convert alphanumeric information to beautiful interactive dashboards. In the lines below, a list of pros and cons according to my experience.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>It does not require coding experience.</li>
+<li>Intuitive to learn.</li>
+<li>Quick to setup.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>No version control.</li>
+<li>No automatic refreshing of reports.</li>
+<li>Everything need manual effort.</li>
+<li>Poor screen resolution.</li>
+<li><strong>Limited tools for data preprocessing.</strong></li>
+<li>Impossible to store variables.</li>
+<li>You need to pay to use.</li>
+<li>No support to advanced statistic.</li>
+<li>No open-source.</li>
+<li>No Linux support (desktop version).</li>
+<li>No Markdown/HTML support.</li>
+</ul>
+<p>To avoid the limitation in data wrangling we use R and tidyverse.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="preprocessing.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tableu dashboard project!</span></span>
+<span id="cb4-2"><a href="preprocessing.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="preprocessing.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># My questions:</span></span>
+<span id="cb4-4"><a href="preprocessing.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. How much the system growth?</span></span>
+<span id="cb4-5"><a href="preprocessing.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. What are the most popular destination station?</span></span>
+<span id="cb4-6"><a href="preprocessing.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. What is the most recurrent travel?</span></span>
+<span id="cb4-7"><a href="preprocessing.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="preprocessing.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-9"><a href="preprocessing.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb4-10"><a href="preprocessing.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb4-11"><a href="preprocessing.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb4-12"><a href="preprocessing.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb4-13"><a href="preprocessing.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb4-14"><a href="preprocessing.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;scripts/functions.R&quot;</span>)</span>
+<span id="cb4-15"><a href="preprocessing.html#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="preprocessing.html#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="preprocessing.html#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="preprocessing.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Download data</span></span>
+<span id="cb4-19"><a href="preprocessing.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">download_data</span>()</span>
+<span id="cb4-20"><a href="preprocessing.html#cb4-20" aria-hidden="true" tabindex="-1"></a>all_csvs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;data_trip/&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.csv$&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-21"><a href="preprocessing.html#cb4-21" aria-hidden="true" tabindex="-1"></a>read_files <span class="ot">&lt;-</span> <span class="fu">lapply</span>(all_csvs, read_csv) </span>
+<span id="cb4-22"><a href="preprocessing.html#cb4-22" aria-hidden="true" tabindex="-1"></a>read_files <span class="ot">&lt;-</span> <span class="fu">lapply</span>(read_files[<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>], change_type)</span>
+<span id="cb4-23"><a href="preprocessing.html#cb4-23" aria-hidden="true" tabindex="-1"></a>final_db <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(read_files[<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>])</span>
+<span id="cb4-24"><a href="preprocessing.html#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="preprocessing.html#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># QUESTION n01: How much the system growth?</span></span>
+<span id="cb4-26"><a href="preprocessing.html#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------</span></span>
+<span id="cb4-27"><a href="preprocessing.html#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="preprocessing.html#cb4-28" aria-hidden="true" tabindex="-1"></a>number_of_trips <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_along</span>(all_csvs), ntrip_fx)</span>
+<span id="cb4-29"><a href="preprocessing.html#cb4-29" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(<span class="fu">gsub</span>(<span class="st">&quot;-.*|_.*&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">basename</span>(all_csvs)),<span class="st">&quot;01&quot;</span>), <span class="at">format =</span> <span class="st">&quot;%Y%m%d&quot;</span>)</span>
+<span id="cb4-30"><a href="preprocessing.html#cb4-30" aria-hidden="true" tabindex="-1"></a>df_final_q1 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">date =</span> dates, <span class="at">trips =</span> number_of_trips)</span>
+<span id="cb4-31"><a href="preprocessing.html#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df_final_q1, <span class="st">&quot;results/question_01.csv&quot;</span>)</span>
+<span id="cb4-32"><a href="preprocessing.html#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="preprocessing.html#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># QUESTION n02: How much the system growth?</span></span>
+<span id="cb4-34"><a href="preprocessing.html#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------</span></span>
+<span id="cb4-35"><a href="preprocessing.html#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="preprocessing.html#cb4-36" aria-hidden="true" tabindex="-1"></a>final_db_subset <span class="ot">&lt;-</span> final_db[<span class="fu">c</span>(<span class="st">&quot;end station name&quot;</span>, <span class="st">&quot;end station latitude&quot;</span>, <span class="st">&quot;start station longitude&quot;</span>)]</span>
+<span id="cb4-37"><a href="preprocessing.html#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(final_db_subset) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;x&quot;</span>)</span>
+<span id="cb4-38"><a href="preprocessing.html#cb4-38" aria-hidden="true" tabindex="-1"></a>final_db_subset <span class="ot">&lt;-</span> final_db_subset[<span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)] </span>
+<span id="cb4-39"><a href="preprocessing.html#cb4-39" aria-hidden="true" tabindex="-1"></a>final_db_subset_q2 <span class="ot">&lt;-</span> final_db_subset <span class="sc">%&gt;%</span></span>
+<span id="cb4-40"><a href="preprocessing.html#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-41"><a href="preprocessing.html#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(mean)</span>
+<span id="cb4-42"><a href="preprocessing.html#cb4-42" aria-hidden="true" tabindex="-1"></a>final_db_subset_q2<span class="sc">$</span>values <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">table</span>(final_db_subset<span class="sc">$</span>name))</span>
+<span id="cb4-43"><a href="preprocessing.html#cb4-43" aria-hidden="true" tabindex="-1"></a>question_02 <span class="ot">&lt;-</span> final_db_subset_q2[<span class="sc">-</span><span class="dv">3</span>,]</span>
+<span id="cb4-44"><a href="preprocessing.html#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(question_02, <span class="st">&quot;results/question_02.csv&quot;</span>)</span>
+<span id="cb4-45"><a href="preprocessing.html#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="preprocessing.html#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co"># coordinates(question_02) &lt;- ~x+y</span></span>
+<span id="cb4-47"><a href="preprocessing.html#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co"># final_db_subset_q2 &lt;- st_as_sf(question_02)</span></span>
+<span id="cb4-48"><a href="preprocessing.html#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># st_crs(final_db_subset_q2) &lt;- 4326</span></span>
+<span id="cb4-49"><a href="preprocessing.html#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># mapview(final_db_subset_q2, zcol = &quot;values&quot;)</span></span>
+<span id="cb4-50"><a href="preprocessing.html#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="preprocessing.html#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># QUESTION n03: What is the most recurrent travel?</span></span>
+<span id="cb4-52"><a href="preprocessing.html#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------</span></span>
+<span id="cb4-53"><a href="preprocessing.html#cb4-53" aria-hidden="true" tabindex="-1"></a>select_names <span class="ot">&lt;-</span> final_db[<span class="fu">c</span>(<span class="st">&quot;start station name&quot;</span>, <span class="st">&quot;end station name&quot;</span>)] <span class="sc">%&gt;%</span> </span>
+<span id="cb4-54"><a href="preprocessing.html#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="st">`</span><span class="at">start station name</span><span class="st">`</span>, <span class="st">`</span><span class="at">end station name</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-55"><a href="preprocessing.html#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-56"><a href="preprocessing.html#cb4-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;[&#39;</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="st">&#39;start station name&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-57"><a href="preprocessing.html#cb4-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;[[&#39;</span>(<span class="dv">1</span>)</span>
+<span id="cb4-58"><a href="preprocessing.html#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="preprocessing.html#cb4-59" aria-hidden="true" tabindex="-1"></a>question_03 <span class="ot">&lt;-</span> final_db[final_db<span class="sc">$</span><span class="st">&quot;start station name&quot;</span> <span class="sc">%in%</span> select_names <span class="sc">&amp;</span> final_db<span class="sc">$</span><span class="st">&quot;end station name&quot;</span> <span class="sc">%in%</span> select_names,] <span class="sc">%&gt;%</span> </span>
+<span id="cb4-60"><a href="preprocessing.html#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;[&#39;</span>(<span class="fu">c</span>(<span class="st">&quot;start station name&quot;</span>, <span class="st">&quot;end station name&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-61"><a href="preprocessing.html#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="st">`</span><span class="at">start station name</span><span class="st">`</span>, <span class="st">`</span><span class="at">end station name</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-62"><a href="preprocessing.html#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) </span>
+<span id="cb4-63"><a href="preprocessing.html#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(question_03, <span class="st">&quot;results/question_03.csv&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="assignment-2-data-exploration-and-geovisualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="question-1-what-is-the-most-recurrent-trip.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

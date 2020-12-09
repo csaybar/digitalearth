@@ -1,0 +1,79 @@
+---
+title: "Geovisualization and Advanced Cartography"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+- name: "<b>Code:</b> s1078735"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE, warning=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+```
+
+# Assignment 2: Data Exploration and Geovisualization
+
+**Topic: ** Assignment 2 deals with the exploration of interactive tools to explore data through the preparation of different views on the data. 
+
+**Tools:** Tableau (Public)
+
+**Data:**
+
+    • BLUEbikes trip data
+    • https://www.bluebikes.com/system-data 
+    • https://s3.amazonaws.com/hubway-data/index.html
+
+**Support material:**
+
+    • Overview on visualizations (paper): a tour through the visualization zoo
+    • Online help of Tableau
+    • …
+
+**Expected outcomes:**
+
+    • Specify three questions about the information contained in the data that you would like to answer
+    • Prepare visualizations/diagrams/maps that support answering the questions
+    • Prepare a documentation of your questions, visualizations and answers found
+    • Take notes about your observations on the strength and weaknesses of the software program 
+    • Present the visualization prepared in lesson 10
+
+
+# Preprocessing.
+
+
+
+# Question #1: What is the most recurrent trip?
+
+
+
+# Question #2: How much has **BLUEbikes** grown?
+
+
+1. Create a Dockerfile (expose the port, see below), and run: 
+
+# Question #3: What are the most popular destinations?
+
+1. Create a Dockerfile (expose the port, see below), and run: 

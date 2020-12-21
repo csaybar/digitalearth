@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAGA_METADATA>
+  <DATABASE>
+    <FIELDS>
+      <FIELD TYPE="INTEGER">SEGMENT_ID</FIELD>
+      <FIELD TYPE="INTEGER">NODE_A</FIELD>
+      <FIELD TYPE="INTEGER">NODE_B</FIELD>
+      <FIELD TYPE="INTEGER">BASIN</FIELD>
+      <FIELD TYPE="INTEGER">ORDER</FIELD>
+      <FIELD TYPE="INTEGER">ORDER_CELL</FIELD>
+      <FIELD TYPE="DOUBLE">LENGTH</FIELD>
+    </FIELDS>
+  </DATABASE>
+  <SOURCE></SOURCE>
+  <HISTORY saga-version="7.3.0">
+    <TOOL library="ta_compound" id="0" name="Basic Terrain Analysis">
+      <OPTION type="grid_system" id="PARAMETERS_GRID_SYSTEM" name="Grid system">
+        <CELLSIZE>0.0000899881</CELLSIZE>
+        <XMIN>12.6969581198</XMIN>
+        <XMAX>12.7437519318</XMAX>
+        <YMIN>47.3244724993</YMIN>
+        <YMAX>47.3663169658</YMAX>
+      </OPTION>
+      <OPTION type="integer" id="THRESHOLD" name="Channel Density">5</OPTION>
+      <INPUT type="grid" id="ELEVATION" name="Elevation" system="PARAMETERS_GRID_SYSTEM">
+        <TOOL library="ta_preprocessor" id="2" name="Sink Removal">
+          <OPTION type="grid_system" id="PARAMETERS_GRID_SYSTEM" name="Grid system">
+            <CELLSIZE>0.0000899881</CELLSIZE>
+            <XMIN>12.6969581198</XMIN>
+            <XMAX>12.7437519318</XMAX>
+            <YMIN>47.3244724993</YMIN>
+            <YMAX>47.3663169658</YMAX>
+          </OPTION>
+          <OPTION type="choice" id="METHOD" name="Method" index="1">Fill Sinks</OPTION>
+          <OPTION type="boolean" id="THRESHOLD" name="Threshold">false</OPTION>
+          <OPTION type="double" id="THRSHEIGHT" name="Threshold Height">100.000000</OPTION>
+          <INPUT type="grid" id="DEM" name="DEM" system="PARAMETERS_GRID_SYSTEM">
+            <TOOL library="io_gdal" id="0" name="Import Raster">
+              <OPTION type="file" id="FILES" name="Files">/home/csaybar/Documents/Github/digitalearth/assigments/spatial_analisys/assigment_04/data/dem_borders.tif</OPTION>
+              <OPTION type="choice" id="MULTIPLE" name="Multiple Bands Output" index="2">automatic</OPTION>
+              <OPTION type="boolean" id="SELECT" name="Select from Multiple Bands">false</OPTION>
+              <OPTION type="boolean" id="TRANSFORM" name="Transformation">true</OPTION>
+              <OPTION type="choice" id="RESAMPLING" name="Resampling" index="0">Nearest Neighbour</OPTION>
+              <OUTPUT type="grid_list" id="GRIDS" name="Grids">dem_borders</OUTPUT>
+            </TOOL>
+          </INPUT>
+          <OUTPUT type="grid" id="DEM_PREPROC" name="Preprocessed DEM">dem_borders [no sinks]</OUTPUT>
+        </TOOL>
+      </INPUT>
+      <OUTPUT type="shapes" id="CHANNELS" name="Channel Network">Channels</OUTPUT>
+    </TOOL>
+  </HISTORY>
+  <FILE></FILE>
+  <DESCRIPTION></DESCRIPTION>
+  <PROJECTION>
+    <OGC_WKT>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]</OGC_WKT>
+    <PROJ4>+proj=longlat +datum=WGS84 +no_defs</PROJ4>
+    <EPSG>4326</EPSG>
+  </PROJECTION>
+</SAGA_METADATA>

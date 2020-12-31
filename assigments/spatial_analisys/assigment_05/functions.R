@@ -93,7 +93,8 @@ question_01_01 <- function() {
   basinX <- basin %>% st_cast("LINESTRING")
   m1 <- mapview::mapview(slope, na.color = "#FFFFFF00")
   m2 <- mapview::mapview(basinX$geometry, color = "black", lwd = 3.5)
-  m2 + m1
+  m3 <- mapview::mapview(results_sf$river, color = "blue", legend=FALSE)
+  m2 + m1 + m3
 }
 
 question_01_02 <- function() {
@@ -155,7 +156,6 @@ question_03_01 <- function() {
   m1
 }
 
-
 question_03_02 <- function() {
   dem_raster <- raster("data/dem.tif")
   dem_raster[dem_raster <= 0] = NA
@@ -209,6 +209,6 @@ question_03_04 <- function() {
   slope30$class <- 'slope 30'
   slope120$class <- 'slope 120'
   final_db <- rbind(slope30, slope120)
-  m1 <- ggplot(final_db, aes(values, fill = class)) + geom_density(alpha = 0.2)
+  m1 <- ggplot(final_db, aes(values, fill = class)) + geom_density(alpha = 0.2)  + theme_classic()
   ggplotly(m1)
 }

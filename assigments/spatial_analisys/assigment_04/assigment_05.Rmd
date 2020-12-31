@@ -7,6 +7,7 @@ output:
     toc: true
     toc_float: true
     number_sections: true
+    css: "style.css"
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +16,7 @@ source("functions.R")
 
 # **Research Area** 
 
-Our area of interest is located in the southern part of the state of Salzburg close to Schmitten and Viehhofen cities. It is a small catchment of 120 km2 draining to the Saalach river. The elevation data for this assignment was obtained from the product [ALOS World 3D (AW3D30)](http://www.eorc.jaxa.jp/ALOS/en/aw3d30/aw3d30v11_format_e.pdf). In the map at the right, we display the stream network and basin delineation according to the official information of the Land Salzburg.
+Our area of interest is located in the southern part of the state of Salzburg close to Schmitten and Viehhofen cities. It is a small catchment of 120 km2 draining to the Saalach river. The elevation data for this assignment was obtained from the product [ALOS World 3D (AW3D30)](http://www.eorc.jaxa.jp/ALOS/en/aw3d30/aw3d30v11_format_e.pdf). In the map below, we display the stream network and basin delineation according to the official information of the Land Salzburg.
 
 ```{r echo=FALSE}
 mapview::mapviewOptions(fgb = FALSE)
@@ -30,7 +31,6 @@ After a visual inspection, it can be concluded that there is no significance dif
 
 
 ```{r message=FALSE, echo=FALSE}
-mapview::mapviewOptions(fgb = FALSE)
 suppressMessages(suppressWarnings(map_02()))
 ```
 
@@ -41,7 +41,6 @@ The map in the **left**(**right**) side was generated using **SAGA** (informatio
 Considering a maximum time of concentration (**60 minutes**), we calculate the concentration time for all the pixels of the catchment taking into account the longest watercourse length and the average slope of the watercourse. See the next [**C++ code**](https://sourceforge.net/p/saga-gis/code/ci/master/tree/saga-gis/src/tools/terrain_analysis/ta_hydrology/IsochronesVar.cpp#l475) to get more information about the empirical equations used here.
 
 ```{r message=FALSE, echo=FALSE}
-mapview::mapviewOptions(fgb = FALSE)
 suppressMessages(suppressWarnings(map_03()))
 ```
 
@@ -53,7 +52,6 @@ The histogram below shows that most critical areas are located at a concentratio
 increase the water storage, increasing forest areas and/or avoiding crop areas, to prevent flash floods.
 
 ```{r message=FALSE, echo = FALSE}
-mapview::mapviewOptions(fgb = FALSE)
 suppressMessages(suppressWarnings(map_04()))
 ```
 

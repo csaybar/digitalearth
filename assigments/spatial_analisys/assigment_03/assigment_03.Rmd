@@ -18,6 +18,7 @@ library(ggplot2)
 library(mapview)
 library(rasterVis)
 source("functions.R")
+mapview::mapviewOptions(fgb = FALSE)
 ```
 
 ### Formal introduction to the **meuse dataset** {data-commentary-width=650}
@@ -26,7 +27,8 @@ source("functions.R")
 meuse <- create_meuse() 
 m1 <- mapview(
   x = meuse, 
-  zcol = "dist",
+  zcol = "dist.m",
+  layer.name = "distance to the river (m)",
   legend = TRUE,
   cex=10
 )
@@ -36,7 +38,7 @@ m1@map
 -------------------------------------------------------------------------
 
 <div class="floro">
-**Stein, Belgium** is an agriculture village which, have many problems with soil pollution. Due to the situation, the authorities created the **Meuse** dataset that gives information about the top soil heavy metal concentrations (ppm), along with a number of soil and landscape variables. Heavy metal concentrations are bulk sampled from an area of approximately 15 m x 15 m ([Pebesma, 2020](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)).
+**Stein, Belgium** is an agriculture village which have many problems with soil pollution. Due to the situation, the authorities created the **Meuse** dataset that gives information about the top soil heavy metal concentrations (ppm), along with a number of soil and landscape variables. Heavy metal concentrations are bulk sampled from an area of approximately 15 m x 15 m ([Pebesma, 2020](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)).
 
 **This dataset contains the following columns:**
 
@@ -173,7 +175,7 @@ Using the spherical variogram model, the kriging weights were calculated by deri
 <div class="floro">
 **out-of-sample testing** or **cross-validation** is a statistical method that could be used to estimate the local and global error of spatial models.
 
-For this example we use **k-fold out-of-sample testing** (see left image). In this algorithm, The original sample is randomly partitioned into k equal sized subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining k − 1 subsamples are used as training data. The cross-validation process is then repeated k times, with each of the k subsamples used exactly once as the validation data. The k results can then be averaged to produce a single estimation.
+For this example we use **5-fold out-of-sample testing** (see left image). In this algorithm, The original sample is randomly partitioned into k equal sized subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining k − 1 subsamples are used as training data. The cross-validation process is then repeated k times, with each of the k subsamples used exactly once as the validation data. The k results can then be averaged to produce a single estimation.
 
 The advantage of this method over repeated random sub-sampling (see right image) is that all observations are used for both training and validation and each observation is used for validation exactly once. The **5-fold cross-validation** is used for zinc spatial prediction.
 </div>

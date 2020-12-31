@@ -105,8 +105,5 @@ map_03()
 The side map show us the area of influence of the 4 most popular kindergardens in Salzburg: **AGG "English Play Corner"**, **AGG Vogelweiderstrasse**, **R.k. Pfarr-KG Dompfarre**, and 
 **KG Alpensiedlung**.
 
-Unlike the [horizontal distance assignment](https://csaybar.github.io/digitalearth/assigments/spatial_analisys/assigment_01/assigment_01.html) we considerate the walking time distance each for 4,8 and 10 minutes.
-
-In contrast to the horizontal distance, the walking time distance has a more irregular shape, which is linked to the complexity of the streets. That is the reason why each kindergarten has a unique geometry.
-
+Unlike the [horizontal distance assignment](https://csaybar.github.io/digitalearth/assigments/spatial_analisys/assigment_01/assigment_01.html), here we consider a **walking time distance** for 4,8 and 10 minutes. It can be observed that, the walking time distance has a more irregular shape, which is inked to the complexity of the streets. In places without many streets (e.g. AGG Vogelweiderstrasse) the area of influence will be larger compared to places near the city center (e.g. KG Alpensiedlung).
 </div>

@@ -27,7 +27,7 @@ source("functions.R")
 **panorama of the city of Deniliquin**
 
 
-The city of Deniliquin, Austria (see image above) has been receiving more than twice of tourists each year due to new tourist attractions. For this reason, the city decision makers have planned the extension/modernization of the airport located to the outskirts of the city.
+The city of Deniliquin, Austria (see image below) has been receiving more than twice of tourists each year due to new tourist attractions. For this reason, the city decision makers have planned the extension/modernization of the airport located to the outskirts of the city.
 
 The modernization of the airport involves the construction of a series of buildings that could cause a serious visual impact to the neighborhoods near to the airport. The main building to be constructed is the **air traffic control tower** that needs to have an adequate view of the surrounding area of the airport. Therefore, a height between **10-30 meters** has been planned. 
 <br>
@@ -41,7 +41,7 @@ suppressWarnings(
 )
 ```
 
-In the next map we estimate the visual impact of the planned tower considering multiple altitudes, a value of 5 represents that the pixel is visible for the planned tower to a height of 30, 25, 20, 15, and 10 meters. The [viewshed](https://grass.osgeo.org/grass78/manuals/r.viewshed.html) of the airport traffic control tower was computed considering a elevation raster map of 5 meters (See the raster description at the end of this document) in a radius of 10 kilometers. Due to computational limitations, the raster is displayed at a low spatial resolution. 
+In the next map we estimate the visual impact of the planned tower considering multiple altitudes, a value of 5 represents that the pixel is visible for the planned tower to a height of 30, 25, 20, 15, and 10 meters. The [viewshed](https://grass.osgeo.org/grass78/manuals/r.viewshed.html) of the airport traffic control tower was computed considering a elevation raster map of 5 meters (See the raster description at the end of this document). Due to computational limitations, the raster is displayed at a low spatial resolution. 
 
 ```{r echo=FALSE}
 mapview::mapviewOptions(fgb = FALSE)
@@ -69,26 +69,17 @@ suppressWarnings(
 
 # Report to the community council
 
-The plans to modernize the Deniliquin airport will carry out a series of environmental and visual
-impacts. This report focuses on the last one, trying to assess the most efficient altitude, in 
-terms of less impact, for the **air traffic control tower**.
+The plans to modernize the Deniliquin airport will carried out a serie of environmental and 
+visual impacts. This report focus in the last one, trying to assess the most efficient altitude
+for the **air traffic control tower** which is the main infrastructure to be built.
 
-Considering a radius of 10 kilometers we observe that when the altitude change from 10 meters to 
-30 meters, the viewshed of the tower increase from 30 to 55 kilometers square. One point to take 
-into account is that the areas surrounding Deniliquin present a plain topography. Therefore, the
-tower could be seen at long distances, if there are no adverse atmospheric conditions, affecting
-outdoor tourist attractions.
 
-As a result, this report recommends building an  **air traffic control tower** of 10 meters. Although
-the construction of a higher tower could be beneficial in long term planning, a lower one will blend
-in better with the landscape and allow Deniliquin  to continue maintaining that rustic and rural
-atmosphere for which it is so famous.
 
-# DEM description 
+The simple viewshed analyses show that the nearly the entire town of Zell am See will have a clear view of the wind turbine. A wind turbine with a height of 200 m will only slightly increase the affected areas.
 
-**Obtained from [Geoscience Australia, 2015. Digital Elevation Model (DEM) of Australia derived from LiDAR 5 Metre Grid. Geoscience Australia, Canberra](https://developers.google.com/earth-engine/datasets/catalog/AU_GA_AUSTRALIA_5M_DEM#citations)**
+When it comes to the total number of affected buildings the number increases by 366. However, this is only because the viewshed of the wind turbine now extends much further to other towns like Kaprun. Here is where most of the new buildings are located to see the wind turbine, when the height of the wind turbine is increased.
 
-The Digital Elevation Model (DEM) 5 Metre Grid of Australia derived from LiDAR model represents a National 5 metre (bare earth) DEM which has been derived from some 236 individual LiDAR surveys between 2001 and 2015 covering an area in excess of 245,000 square kilometres. These surveys cover Australia's populated coastal zone; floodplain surveys within the Murray Darling Basin, and individual surveys of major and minor population centres. All available 1 metre resolution LiDAR-derived DEMs have been compiled and resampled using a neighbourhood-mean method to 5 metre resolution datasets for each survey area, and then merged into a single dataset for each State. Each state's dataset is provided as a separate image within the image collection.
+But as the fuzzy viewshed analyses shows, the visual impact of a object decreases with increasing distance to the object. Therefore, the affected areas in cities other than Zell am See are of lesser importance, because the impact is smaller.
 
-The acquisition of the individual LiDAR surveys and derivation of the 5m product has been part of a long-term collaboration between Geoscience Australia, the Cooperative Research Centre for Spatial Information (CRCSI), the Departments of Climate Change and Environment, State and Territory jurisdictions, Local Government and the Murray Darling Basin Authority under the auspices of the National Elevation Data Framework and Coastal and Urban DEM Program. The source datasets have been captured to standards that are generally consistent with the Australian ICSM LiDAR Acquisition Specifications with require a fundamental vertical accuracy of at least 0.30m (95% confidence) and horizontal accuracy of at least 0.80m (95% confidence).
+As a result, this report recommends building the 200-meter wind turbine. The additional height of the turbine is seen by more buildings and affects more areas. However, the increase in power generation can be rated higher than the visual impact on buildings that only see the wind turbine from a great distance as a small object.
 

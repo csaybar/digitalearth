@@ -1,0 +1,61 @@
+---
+title: "Radar remote sensing assignment"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+- name: "<b>Code:</b> s1078735"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+abstract: |
+  
+  This report shows all the steps involved in pre-processing and analyzing two Sentinel-1 SAR GRD images via [**SNAP**](https://step.esa.int/main/toolboxes/snap/). The SAR images were taken before and after a forest fire in the summer of 2017 in Andalusia, Spain. Our results show that the burned area corresponds better with **VH** temporal ratio values than with **VV**. 
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+
+```
+
+# Part I - Classifiers
+
+
+
+# Part II - Object features for classification
+
+## Question 1
+**What becomes obvious if you compare the values for the two objects of the chessboard segmentation?**
+
+
+## Question 2
+**Which features don‘t make that much sense in this case?**
+
+## Question 3
+**How many objects were classified as "water"?**
+
+## Question 4
+**What is the area of the whole vegetation class (if you select the vegetation class to generate the feature, it will summarize the values from the grouped sub-classes)?**
+
+## Question 5
+**What is the meaning of the distance value when you create the feature?**

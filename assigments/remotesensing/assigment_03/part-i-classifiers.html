@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Radar remote sensing assignment</title>
+  <meta name="description" content="Radar remote sensing assignment" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Radar remote sensing assignment" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Radar remote sensing assignment" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="part-ii-object-features-for-classification.html"/>
+<script src="libs/header-attrs-2.6.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-i-classifiers.html"><a href="part-i-classifiers.html"><i class="fa fa-check"></i><b>1</b> Part I - Classifiers</a></li>
+<li class="chapter" data-level="2" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html"><i class="fa fa-check"></i><b>2</b> Part II - Object features for classification</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-1"><i class="fa fa-check"></i><b>2.1</b> Question 1</a></li>
+<li class="chapter" data-level="2.2" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-2"><i class="fa fa-check"></i><b>2.2</b> Question 2</a></li>
+<li class="chapter" data-level="2.3" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-3"><i class="fa fa-check"></i><b>2.3</b> Question 3</a></li>
+<li class="chapter" data-level="2.4" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-4"><i class="fa fa-check"></i><b>2.4</b> Question 4</a></li>
+<li class="chapter" data-level="2.5" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-5"><i class="fa fa-check"></i><b>2.5</b> Question 5</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Radar remote sensing assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Radar remote sensing assignment</h1>
+<p class="author"><em><b>Name:</b> Cesar Luis Aybar Camacho</em></p>
+<p class="author"><em><b>Program:</b> Erasmus Copernicus Master in Digital Earth</em></p>
+<p class="author"><em><b>Code:</b> s1078735</em></p>
+<p class="date"><em><b>Date:</b> 04 Jänner, 2021</em></p>
+</div>
+<div id="part-i---classifiers" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Part I - Classifiers</h1>
+<p><strong>Download my ECognition project <a href="https://github.com/csaybar/digitalearth/raw/master/assigments/remotesensing/assigment_03/data/aybar_classification.dpr">here</a>.</strong></p>
+<p>In this first part we will train a model of <a href=""><strong>random trees</strong></a>, the steps are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Generation of homogeneous areas in the image (super-pixels).</li>
+</ol>
+<p><img src="img/img_01.png" alt="Snow" style="width:100%"></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Creation of samples for each target class.</li>
+</ol>
+<p><img src="img/img_02.png" alt="Forest" style="width:100%"></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Train the classifier (training).</li>
+<li>Apply the classifier in every super-pixels of the image (prediction).</li>
+</ol>
+<p><img src="img/img_03.png" alt="Mountains" style="width:100%"></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="part-ii-object-features-for-classification.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

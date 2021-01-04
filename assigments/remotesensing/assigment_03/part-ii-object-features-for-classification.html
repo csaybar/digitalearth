@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Part II - Object features for classification | Radar remote sensing assignment</title>
+  <meta name="description" content="2 Part II - Object features for classification | Radar remote sensing assignment" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Part II - Object features for classification | Radar remote sensing assignment" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Part II - Object features for classification | Radar remote sensing assignment" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="part-i-classifiers.html"/>
+
+<script src="libs/header-attrs-2.6.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<script>
+document.write('<div class="logos"><img src="https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg" alt="logo" width="10%" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="part-i-classifiers.html"><a href="part-i-classifiers.html"><i class="fa fa-check"></i><b>1</b> Part I - Classifiers</a></li>
+<li class="chapter" data-level="2" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html"><i class="fa fa-check"></i><b>2</b> Part II - Object features for classification</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-1"><i class="fa fa-check"></i><b>2.1</b> Question 1</a></li>
+<li class="chapter" data-level="2.2" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-2"><i class="fa fa-check"></i><b>2.2</b> Question 2</a></li>
+<li class="chapter" data-level="2.3" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-3"><i class="fa fa-check"></i><b>2.3</b> Question 3</a></li>
+<li class="chapter" data-level="2.4" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-4"><i class="fa fa-check"></i><b>2.4</b> Question 4</a></li>
+<li class="chapter" data-level="2.5" data-path="part-ii-object-features-for-classification.html"><a href="part-ii-object-features-for-classification.html#question-5"><i class="fa fa-check"></i><b>2.5</b> Question 5</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Radar remote sensing assignment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="part-ii---object-features-for-classification" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Part II - Object features for classification</h1>
+<div id="question-1" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Question 1</h2>
+<p><strong>What becomes obvious if you compare the values for the two objects of the chessboard segmentation?</strong></p>
+<p>Chessboard segmentation is the simplest way to create super-pixels in an image. For answer this question, the image was firstly segmented into blocks (see image below) of size 10x10 and the following features were added: <strong>NDVI</strong>, <strong>blue band</strong>, <strong>max blue band value in the block</strong>, <strong>area</strong>, and the <strong>shape index</strong>.</p>
+<figure>
+<center>
+<img src="img/img_04.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 01: Result of chessboard segmentation. Object 01
+</strong>
+</caption>
+</center>
+</figure>
+<p>When comparing two different objects, one corresponding to a boat and the other to a river, we note that for this specific example, all features present a similar value except those related to the spectral values (i.e. NDVI and blue band values).</p>
+<figure>
+<center>
+<img src="img/img_05.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 02: Result of chessboard segmentation: Object 02
+</strong>
+</caption>
+</center>
+</figure>
+</div>
+<div id="question-2" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Question 2</h2>
+<p><strong>Which features don’t make that much sense in this case?</strong></p>
+<p>All those features related to the geometry of the objects (e.g. area, perimeter, etc.) since the chessboard segmentation creates homogeneous objects. For instance, for all the objects in the image the area always will be 100 pixels units due to that the block is of 10x10 pixels.</p>
+</div>
+<div id="question-3" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Question 3</h2>
+<p><strong>How many objects were classified as “water”?</strong></p>
+<p>For the question 3 and 4 we carry out a multiresolution segmentation. As figure 4 and figure 5
+shows, the geometry features (e.g. area) has more relevance in comparison to chessboard
+segmentation.</p>
+<figure>
+<center>
+<img src="img/img_07.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 03: Result of multiresolution segmentation: Object 01
+</strong>
+</caption>
+</center>
+</figure>
+<p>Using a simple threshold we classify the objects in the image in:</p>
+<ul>
+<li>vegetation: NDVI &gt;= 0.25
+<ul>
+<li>high_air_quality</li>
+<li>low_air_quality</li>
+</ul></li>
+<li>water: NDVI &lt;= -0.15</li>
+<li>boat: Using <strong>relative border to</strong>, if the object is completely surrounded by water.</li>
+</ul>
+<figure>
+<center>
+<img src="img/img_08.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 04: Result of multiresolution segmentation: Object 02
+</strong>
+</caption>
+</center>
+</figure>
+<p>After the threshold-based classification, we obtain 3 objects of class water.</p>
+</div>
+<div id="question-4" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Question 4</h2>
+<p><strong>What is the area of the whole vegetation class (if you select the vegetation class to generate the feature, it will summarize the values from the grouped sub-classes)?</strong></p>
+<p>We obtain a vegetation area of 158660 pixel units or 0.0571176 km2.</p>
+<figure>
+<center>
+<img src="img/img_09.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 05: Summarize after the threshold based classification.
+</strong>
+</caption>
+</center>
+</figure>
+</div>
+<div id="question-5" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Question 5</h2>
+<p><strong>What is the meaning of the distance value when you create the feature?</strong></p>
+<p>For this question a second object level is created with a scale of 50, shape 0.5,
+and compact 0.5.</p>
+<figure>
+<center>
+<img src="img/img_10.png" style="width:70%"><br>
+<caption>
+<strong>
+Figure 05: Second level of segmentation.
+</strong>
+</caption>
+</center>
+</figure>
+<p>In this case, the vegetation super-class contains the classes, high_air_quality and low_air_quality. We can create a new feature based on the relations between super and sub-classes. The <strong>distance</strong> argument represents the hierarchical distance to the super-object.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-i-classifiers.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -25,7 +25,7 @@ r3 <- raster("data/water_count_id4383_3035.tiff")
 **Make yourself familiar with the system and the querying language**
 
 According to the documentation in [https://manual.sen2cube.at/](https://manual.sen2cube.at/),
-sen2cube is a data cube platform that permits realize queries without coding skills. The spatial processes that `sen2cube.at` offers to the users are:
+sen2cube is a data cube platform that permits realize queries without coding skills. The processes offered by `sen2cube.at` are:
 
 - Semantic content-based image retrieval
 - Cloud-free composite
@@ -50,7 +50,7 @@ To start to use `sen2cube.at` the user must have to have a user account. After l
 
 **Create a new model (or adjust an existing one) for a specific use-case and execute it in 3-4 areas within Austria (so-called inferences)**
 
-One of the main features that sen2cube offers is that all the pixels have associated a unique category based on the Satellite Image Automatic Mapper (SIAM). Using this information we can select only the pixels related to "`water`" and count the presence of this category over time.
+One of the main features that sen2cube offers to the users is that all the pixels have associated a unique category based on the Satellite Image Automatic Mapper (SIAM). Using this information we can select only the pixels related to "`water`" and count the presence of this category over time.
 
 <figure>
 <center>
@@ -102,4 +102,4 @@ suppressWarnings(
 
 **Export the model as xml, create a document with a short description and screenshots  of the results of the inferences and submit it to blackboard.**
 
-The water count model can be found [here]().
+The water count model can be found [here](https://raw.githubusercontent.com/csaybar/digitalearth/master/assigments/bigdata/assigment_04/water_count.xml).

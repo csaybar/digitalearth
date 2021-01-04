@@ -1,0 +1,92 @@
+---
+title: "**Vector Overlay in the city of Salzburg**"
+author: "Cesar Aybar"
+date: "2020-01-04"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    css: "style.css"
+---
+
+```{r setup, include=FALSE}
+library(googleCloudStorageR)
+library(reticulate)
+library(leaflet)
+library(leafem)
+library(raster)
+library(stars)
+library(sf)
+source("functions.R")
+```
+
+
+# What is the overlay analysis?
+
+Overlay analysis permit to merge different layers in a single one. This technique is suitable to identify
+the best or most preferred locations for a specific phenomenon. Between problems that could be solved using overlay analysis include:
+
+- Where to site a new childrendarden.
+- Which sites are better for solar power plants.
+- Estimate the vulnerability to landslides.
+
+# Area of Interest (AOI) an dataset
+
+The AOI is the city of Salzburg, Austria. The dataset was obtained from ArcGIS REST Services Directory, and download using a [Python script](https://raw.githubusercontent.com/csaybar/digitalearth/master/assigments/spatial_analisys/assigment_01/download_AGOnline.py). After download the shapefiles, a spatialite dataset was created with the following tables:
+
+- **Salzburg City**: Linestring which represent the outline of Salzburg city.
+- **Districts Salzburg City**: District of Salzburg city.
+- **ZGIS_SBG_LULC**: Land use of Salzburg city.
+- **ZGIS_SBG_Geology**: Geology of Salzburg city.
+
+```{r echo=FALSE}
+mapview::mapviewOptions(fgb = FALSE)
+suppressWarnings(
+  suppressMessages(
+    map_01()
+  )
+)
+```
+
+
+# Filter the land use table
+
+The first step of the process was to filter the table **ZGIS_SBG_LULC**. For the assignment, I chose the "Industrial, commercial, public, military, and private units" class. See the map below to visualize these areas in Salzburg city.
+
+```{r echo=FALSE}
+mapview::mapviewOptions(fgb = FALSE)
+suppressWarnings(
+  suppressMessages(
+    map_02()
+  )
+)
+```
+
+# Intersect the filtered area and the geology dataset
+
+In SpatiaLite the spatial relations between two different tables (geometries) are made by the Dimensionally Extended 9-Intersection (DE-9IM) model. The intersection operation is realized in 
+three-levels: **interior**, **boundary**, and	**exterior**, and it is necessary to have at least one point in common.	The map below displays our results after the intersection.
+
+
+```{r echo=FALSE}
+mapview::mapviewOptions(fgb = FALSE)
+suppressWarnings(
+  suppressMessages(
+    map_03()
+  )
+)
+```
+
+# Aggregation by District
+
+Finally, we will aggregate (grouping) the geology into the district table according to the larger area. Since in SpatialLite there is no a tool called 'Summarize Data' like ArcGIS. We use a for (loop), `ST_INTERSECT`,  and `ST_SUMMARY` to obtain a similar tool. The map below show our results.
+
+```{r echo=FALSE}
+mapview::mapviewOptions(fgb = FALSE)
+suppressWarnings(
+  suppressMessages(
+    map_04()
+  )
+)
+```

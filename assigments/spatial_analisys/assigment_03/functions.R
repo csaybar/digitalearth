@@ -50,7 +50,7 @@ zinc_kriging_cv_npoints <- function() {
   meuse <- create_meuse()
   n_points <- c(25, 50,75,100,125,155)
   rmse_values_boostrap <- NULL
-  for (variable in 1:10) {
+  for (variable in 1:100) {
     rmse_values <- NULL
     for (n_point in n_points) {
       meuse_sample <- meuse[sample(nrow(meuse),n_point),]
@@ -62,8 +62,7 @@ zinc_kriging_cv_npoints <- function() {
     }
     rmse_values_boostrap <- rbind(rmse_values_boostrap, rmse_values)
   }
-  final_values <- apply(rmse_values_boostrap,2,mean)
-  data.frame(npoints = n_points, error = final_values)
+  data.frame(npoints = n_points, error = rmse_values_boostrap %>% t)
 }
 
 
@@ -71,7 +70,7 @@ zinc_kriging_cv_npoints <- function() {
 zinc_dranges <- function() {
   meuse <- create_meuse()
   meusegrid <- create_meusegrid()
-  
+
   lzn_vgm <- variogram(log(zinc)~1, meuse)
   lzn_fit <- fit.variogram(lzn_vgm, model = vgm(1, "Sph", 900, 1))
   range_values <- c(200, 400, 600, 800, 1000, 1200)
@@ -83,7 +82,7 @@ zinc_dranges <- function() {
     lzn.kriged <- krige(log(zinc)~1, meuse, meusegrid, model = lzn_fit, debug.level	= 0)[1]
     gridded(lzn.kriged) <- TRUE
     lzn.kriged_r <- raster(lzn.kriged)
-    lzn.kriged_stack[[index]] <- lzn.kriged_r 
+    lzn.kriged_stack[[index]] <- lzn.kriged_r
   }
   interp_dranges <- stack(lzn.kriged_stack)
   names(interp_dranges) <- sprintf("zinc_%s.tif", range_values)

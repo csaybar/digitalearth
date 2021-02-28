@@ -1,0 +1,11 @@
+id;Red;Green;Blue;Class_Names
+1;0;128;128;coniferous_tree
+2;0;255;0;deciduous_tree
+3;160;255;192;grassland
+4;192;128;0;bare_soil
+5;255;255;160;cropland
+6;0;0;0;vehicles
+7;128;128;128;road
+8;189;0;0;buildings
+9;0;0;255;water
+10;87;255;192;park

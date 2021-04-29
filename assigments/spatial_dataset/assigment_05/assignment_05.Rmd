@@ -1,0 +1,63 @@
+---
+title: "Spatial Databases assignment"
+author:
+- name: "<b>Name:</b> Cesar Luis Aybar Camacho"
+- name: "<b>Program:</b> Erasmus Copernicus Master in Digital Earth"
+- name: "<b>Code:</b> s1078735"
+date: '<b>Date:</b> `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::gitbook:
+    includes:
+      in_header: header.html
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r htmlTemplate, echo=FALSE, warning=FALSE}
+# Create the external file
+img <- htmltools::img(src = "https://user-images.githubusercontent.com/16768318/96349562-be6c7700-10b0-11eb-973d-ce55906dcf7e.jpeg", 
+               alt = 'logo', 
+               width="10%",
+               style = 'position:absolute; top:50px; right:1%; padding:10px;z-index:200;')
+
+htmlhead <- paste0('
+<script>
+document.write(\'<div class="logos">',img,'</div>\')
+</script>
+')
+
+readr::write_lines(htmlhead, path = "header.html")
+```
+
+# Data Modeling
+
+## Conceptual Model
+
+<center>
+  <img src="img/img_01.png">
+</center>
+
+##    Logical Model
+
+<center>
+  <img src="img/img_02.png">
+</center>
+
+
+## What is the universe of discourse in this example and how do you find it out?
+
+In the example above, the universe of discourse would be all the entities related to urban/rural transportation: buses, employees, schedules, traffic, bus stops, etc. The first step to reference the universe of discourse is to create a global conceptual model, similar to the one created previously but with more entities and relationships.
+
+## The description was provided to you by a non-database-expert. Are there some information you are still missing?
+
+- More information on all the employees (not only inspectors and conductors).
+- Importance of stops, weighted by user congestion.
+- Average profitability of the lines.
+- Annual maintenance cost of buses.
+- Recurrence of transport use by users.
+- Consider the traffic and time.
